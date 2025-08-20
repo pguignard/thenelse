@@ -1,0 +1,21 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.db
+*.sqlite3
+
+# Environnements virtuels
+.venv/
+venv/
+env/
+
+# --- Node / React ---
+node_modules/
+build/
+dist/
+
+# --- Général ---
+.DS_Store
+*.log
