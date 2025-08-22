@@ -20,7 +20,7 @@ run_backend() {
     echo "🚀 Lancement du backend FastAPI en mode DEV"
     source .venv/bin/activate
     cd backend
-    uvicorn main:app --host 0.0.0.0 --port 8000
+    uvicorn quiz_api.main:app --reload --host 0.0.0.0 --port 8000
 }
 
 # Fonction pour lancer le website
