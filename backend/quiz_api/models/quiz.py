@@ -2,12 +2,23 @@ from pydantic import BaseModel, Field, field_validator
 
 
 class Snippet(BaseModel):
-    snippet: str = Field(..., example="print(5 // 2)")
-    reponses: list[str] = Field(..., example=["2", "2.5", "3", "TypeError"])
-    bonne_reponse_id: int = Field(..., ge=0, example=0)
-    explication: str = Field(
-        ..., example="// est la division entière (floor) sur des int: 5 // 2 = 2."
-    )
+    snippet: str = Field(...)
+    reponses: list[str] = Field(...)
+    bonne_reponse_id: int = Field(..., ge=0)
+    explication: str = Field(...)
+
+    model_config = {
+        "json_schema_extra": {
+            "examples": [
+                {
+                    "snippet": "print(5 // 2)",
+                    "reponses": ["2", "2.5", "3", "TypeError"],
+                    "bonne_reponse_id": 0,
+                    "explication": "// est la division entière (floor) sur des int: 5 // 2 = 2.",
+                }
+            ]
+        }
+    }
 
     @field_validator("bonne_reponse_id")
     @classmethod
