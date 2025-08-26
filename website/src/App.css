@@ -83,6 +83,8 @@ h1 {
 }
 
 .explanation {
+  font-size: 1.1rem;
+  line-height: 1.7;
   margin: 1rem 0;
   padding: 0.7rem;
   background: #ffffff;
@@ -90,6 +92,24 @@ h1 {
   text-align: left;
   font-family: Arial, sans-serif;
   white-space: pre-wrap;
+}
+
+.explanation code {
+  font-size: 1rem;
+  background: #fdf6e3;
+  color: #9f8228;
+  font-family: 'Fira Mono', 'Consolas', monospace;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.explanation blockquote {
+  margin: 0;
+  padding: 0;
+}
+
+.explanation p {
+  margin-bottom: 0;
 }
 
 .explanation h3 {

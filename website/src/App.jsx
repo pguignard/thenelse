@@ -4,6 +4,8 @@ import { solarizedlight } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { useQuery } from '@tanstack/react-query';
 import { fetchRandomQuestion } from './api/quizApi';
 import { defaultQuestion } from './data/defaultData';
+import ReactMarkdown from 'react-markdown';
+
 import './App.css';
 
 function App() {
@@ -105,7 +107,7 @@ function App() {
 
             <div className="explanation">
               <h3>Explication :</h3>
-              <p style={{ whiteSpace: 'pre-line' }}>{quizData.explication}</p>
+              <ReactMarkdown>{quizData.explication}</ReactMarkdown>
             </div>
 
             <button
