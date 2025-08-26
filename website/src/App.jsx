@@ -52,7 +52,10 @@ function App() {
     <div className="app">
       {/* Header */}
       <header>
-        <h1>ThenElse</h1>
+        <h1>
+          <span className='then'>then</span>
+          <span className='else'>else</span>
+        </h1>
       </header>
 
       <main>
@@ -114,7 +117,7 @@ function App() {
               className="new-question-button"
               onClick={handleNewQuestion}
             >
-              Nouvelle question
+              Another snippet please :)
             </button>
           </div>
         )}
