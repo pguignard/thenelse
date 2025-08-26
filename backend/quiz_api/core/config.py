@@ -9,7 +9,7 @@ def create_app() -> FastAPI:
     # Configuration CORS pour le frontend
     app.add_middleware(
         CORSMiddleware,
-        allow_origins=["*"],  # À restreindre en production
+        allow_origins=["http://localhost:5173"],  # ou ["*"] en dev
         allow_credentials=True,
         allow_methods=["*"],
         allow_headers=["*"],

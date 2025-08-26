@@ -1,63 +1,47 @@
-import { useState } from 'react'
-import './App.css'
+import { useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { fetchRandomQuestion } from './api/quizApi';
+import { defaultQuestion } from './data/defaultData';
+import './App.css';
 
 function App() {
   // État pour gérer l'affichage : 'question' ou 'result'
-  const [gameState, setGameState] = useState('question')
-  const [selectedAnswer, setSelectedAnswer] = useState(null)
-  const [isCorrect, setIsCorrect] = useState(false)
+  const [gameState, setGameState] = useState('question');
+  const [selectedAnswer, setSelectedAnswer] = useState(null);
+  const [isCorrect, setIsCorrect] = useState(false);
+  const [showApiError, setShowApiError] = useState(false);
 
-  // Données de démo (remplacées ensuite par l'API)
-  const snippet = `# Guess the output!
+  // React Query : fetch question
+  const {
+    data: question,
+    isLoading,
+    isError,
+    refetch
+  } = useQuery({
+    queryKey: ['randomQuestion'],
+    queryFn: fetchRandomQuestion,
+    retry: false
+  });
 
-numbers = [1, 2, 3, 4, 5, 6]
 
-squares = []
-for n in numbers:
-    if n % 2 == 0:
-        squares.append(n ** 2)
-    else:
-        squares.append(n)
-
-print(squares)`;
-
-  const answers = [
-    "[1, 4, 3, 16, 5, 36]",
-    "[1, 2, 3, 4, 5, 6]",
-    "[1, 9, 25]",
-    "Error"
-  ];
-
-  const correctAnswer = "[1, 4, 3, 16, 5, 36]";
-
-  const explanation = `Let's analyze step by step:
-
-1. The list \`numbers\` is [1, 2, 3, 4, 5, 6].
-2. We loop through each element and check if it's even (\`n % 2 == 0\`).
-   - If even → we append \`n ** 2\` (the square).
-   - If odd → we just append the number itself.
-3. Processing:
-   - n=1 (odd) → append 1
-   - n=2 (even) → append 2**2 = 4
-   - n=3 (odd) → append 3
-   - n=4 (even) → append 4**2 = 16
-   - n=5 (odd) → append 5
-   - n=6 (even) → append 6**2 = 36
-4. Final list: [1, 4, 3, 16, 5, 36].
-
-So the correct answer is [1, 4, 3, 16, 5, 36].`;
+  // Utilise la question de l'API ou la question par défaut si erreur
+  const quizData = (!isError && question) ? question : defaultQuestion;
 
   const handleAnswerClick = (answer) => {
     setSelectedAnswer(answer);
-    setIsCorrect(answer === correctAnswer);
+    setIsCorrect(answer === quizData.reponses[quizData.bonne_reponse_id]);
     setGameState('result');
   };
 
-  const handleNewQuestion = () => {
+  const handleNewQuestion = async () => {
     setGameState('question');
     setSelectedAnswer(null);
     setIsCorrect(false);
-    // Ici, plus tard, on chargera une nouvelle question depuis l'API
+    setShowApiError(false);
+    const result = await refetch();
+    if (result.isError) {
+      setShowApiError(true);
+    }
   };
 
   return (
@@ -68,17 +52,26 @@ So the correct answer is [1, 4, 3, 16, 5, 36].`;
       </header>
 
       <main>
+        {/* Bandeau d'erreur API */}
+        {(showApiError || isError) && (
+          <div style={{ background: '#ffeded', color: '#b91c1c', padding: '0.5rem', borderRadius: '6px', marginBottom: '1rem' }}>
+            Serveur injoignable, question par défaut affichée.
+          </div>
+        )}
+
         {/* Snippet avec style rétro IDE */}
         <div className="code-snippet">
           <div className="code-snippet-header"></div>
           <div className="code-content">
-            <pre>{snippet}</pre>
+            <pre>{quizData.snippet}</pre>
           </div>
         </div>
 
-        {gameState === 'question' && (
+        {isLoading ? (
+          <div>Chargement...</div>
+        ) : gameState === 'question' && (
           <div className="question-section">
-            {answers.map((answer, index) => (
+            {quizData.reponses.map((answer, index) => (
               <button
                 key={index}
                 className="answer-button"
@@ -102,13 +95,13 @@ So the correct answer is [1, 4, 3, 16, 5, 36].`;
 
             {!isCorrect && (
               <div className="correct-answer">
-                Bonne réponse : <strong>{correctAnswer}</strong>
+                Bonne réponse : <strong>{quizData.reponses[quizData.bonne_reponse_id]}</strong>
               </div>
             )}
 
             <div className="explanation">
               <h3>Explication :</h3>
-              <p>{explanation}</p>
+              <p style={{ whiteSpace: 'pre-line' }}>{quizData.explication}</p>
             </div>
 
             <button
@@ -121,7 +114,7 @@ So the correct answer is [1, 4, 3, 16, 5, 36].`;
         )}
       </main>
     </div>
-  )
+  );
 }
 
 export default App
