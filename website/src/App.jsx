@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { solarizedlight } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { useQuery } from '@tanstack/react-query';
 import { fetchRandomQuestion } from './api/quizApi';
 import { defaultQuestion } from './data/defaultData';
@@ -63,7 +65,9 @@ function App() {
         <div className="code-snippet">
           <div className="code-snippet-header"></div>
           <div className="code-content">
-            <pre>{quizData.snippet}</pre>
+            <SyntaxHighlighter language="python" style={solarizedlight} customStyle={{ fontSize: '1rem', margin: 0 }}>
+              {quizData.snippet}
+            </SyntaxHighlighter>
           </div>
         </div>
 
