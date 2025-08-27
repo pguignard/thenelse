@@ -94,31 +94,30 @@ function App() {
 
         {gameState === 'result' && (
           <div className="result-section">
-            <div className={`result-message ${isCorrect ? 'correct' : 'incorrect'}`}>
-              {isCorrect ? '✅ Correct !' : '❌ Incorrect !'}
-            </div>
 
             <div className="selected-answer">
               Votre réponse : <strong>{selectedAnswer}</strong>
             </div>
-
-            {!isCorrect && (
-              <div className="correct-answer">
-                Bonne réponse : <strong>{quizData.reponses[quizData.bonne_reponse_id]}</strong>
-              </div>
-            )}
-
-            <div className="explanation">
-              <h3>Explication :</h3>
-              <ReactMarkdown>{quizData.explication}</ReactMarkdown>
+            <div className={`result-message ${isCorrect ? 'correct' : 'incorrect'}`}>
+              {isCorrect ? '✅ Correct !' : '❌ Incorrect !'}
             </div>
 
             <button
               className="new-question-button"
               onClick={handleNewQuestion}
             >
-              Another snippet please :)
+              ⏭️ Next question !
             </button>
+
+            <div className="explanation">
+              {!isCorrect && (
+                <div className="correct-answer">
+                  ✅ Bonne réponse : <strong>{quizData.reponses[quizData.bonne_reponse_id]}</strong>
+                </div>
+              )}
+
+              <ReactMarkdown>{quizData.explication}</ReactMarkdown>
+            </div>
           </div>
         )}
       </main>

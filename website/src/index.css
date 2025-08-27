@@ -1,16 +1,11 @@
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
+  background-color: var(--color-root-bg);
 }
 
 body {
@@ -20,6 +15,28 @@ body {
 
 
 :root {
-  color: #213547;
-  background-color: #ffffff;
+  --color-root-bg: #ffffff;
+
+  /* Logo */
+  --color-then: #0c50d2;
+  --color-else: #44b7ef;
+
+  /* Border : code snippet */
+  --color-border: #d0d0d0;
+
+  /* Buttons */
+  --color-answer-button-bg: #f5f5f5;
+  --color-answer-button-bg-hover: #ffffff;
+  --color-answer-button-border-hover: #b0b0b0;
+
+  --color-new-question-button: #84cdf1;
+  --color-new-question-button-hover: #d8f2ff;
+  --color-new-question-button-border-hover: #2fa3e0;
+
+  /* Markdown inline code */
+  --color-bg-md-inline-code: #fdf6e3;
+  --color-text-md-inline-code: #9f8228;
+
+  --color-result-correct: #469f67;
+  --color-result-incorrect: #b76161;
 }
