@@ -29,11 +29,12 @@ function App() {
 
 
   // Utilise la question de l'API ou la question par défaut si erreur
+
   const quizData = (!isError && question) ? question : defaultQuestion;
 
   const handleAnswerClick = (answer) => {
     setSelectedAnswer(answer);
-    setIsCorrect(answer === quizData.reponses[quizData.bonne_reponse_id]);
+    setIsCorrect(answer === quizData.choices[quizData.answer_id]);
     setGameState('result');
   };
 
@@ -59,6 +60,13 @@ function App() {
       </header>
 
       <main>
+        {/* Infos sur le snippet */}
+        <div className="snippet-info" style={{ display: 'block', margin: '1.2rem 0', fontSize: '1rem', color: '#555', textAlign: 'left' }}>
+          <div><strong>Langage :</strong> {quizData.language}</div>
+          <div><strong>Niveau :</strong> {quizData.level}</div>
+          <div><strong>Thème :</strong> {quizData.theme}</div>
+          <div><strong>Lignes :</strong> {quizData.length}</div>
+        </div>
         {/* Bandeau d'erreur API */}
         {(showApiError || isError) && (
           <div style={{ background: '#ffeded', color: '#b91c1c', padding: '0.5rem', borderRadius: '6px', marginBottom: '1rem' }}>
@@ -80,7 +88,7 @@ function App() {
           <div>Chargement...</div>
         ) : gameState === 'question' && (
           <div className="question-section">
-            {quizData.reponses.map((answer, index) => (
+            {quizData.choices.map((answer, index) => (
               <button
                 key={index}
                 className="answer-button"
@@ -112,11 +120,11 @@ function App() {
             <div className="explanation">
               {!isCorrect && (
                 <div className="correct-answer">
-                  ✅ Bonne réponse : <strong>{quizData.reponses[quizData.bonne_reponse_id]}</strong>
+                  ✅ Bonne réponse : <strong>{quizData.choices[quizData.answer_id]}</strong>
                 </div>
               )}
 
-              <ReactMarkdown>{quizData.explication}</ReactMarkdown>
+              <ReactMarkdown>{quizData.explanation}</ReactMarkdown>
             </div>
           </div>
         )}

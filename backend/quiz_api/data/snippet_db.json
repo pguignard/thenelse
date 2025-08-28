@@ -1,0 +1,77 @@
+[
+    {
+        "language": "Python",
+        "level": "débutant",
+        "theme": "Compréhensions de listes/dicts/sets",
+        "length": 5,
+        "snippet": "numbers = [1, 2, 3, 4, 5]\nsquares = {x: x**2 for x in numbers if x % 2 == 0}\nprint(squares)",
+        "choices": [
+            "{2: 4, 4: 16}",
+            "{1: 1, 4: 16}",
+            "{3: 9, 5: 25}",
+            "{}"
+        ],
+        "answer_id": 0,
+        "explanation": "La compréhension de dictionnaire filtre les nombres pairs et les met au carré. Seuls 2 et 4 sont pairs."
+    },
+    {
+        "language": "Python",
+        "level": "débutant",
+        "theme": "Compréhensions de listes/dicts/sets",
+        "length": 5,
+        "snippet": "words = ['apple', 'banana', 'avocado']\nvowels = {w: w[0] for w in words if w[0] in 'aeiou'}\nprint(vowels)",
+        "choices": [
+            "{'apple': 'a', 'avocado': 'a'}",
+            "{'banana': 'b'}",
+            "{'apple': 'a', 'banana': 'b', 'avocado': 'a'}",
+            "{}"
+        ],
+        "answer_id": 0,
+        "explanation": "La compréhension de dictionnaire garde les mots commençant par une voyelle. 'apple' et 'avocado' commencent par 'a'."
+    },
+    {
+        "language": "Python",
+        "level": "débutant",
+        "theme": "Compréhensions de listes/dicts/sets",
+        "length": 5,
+        "snippet": "nums = [10, 20, 30]\ndouble = {n // 2 for n in nums}\nprint(double)",
+        "choices": [
+            "{5, 10, 15}",
+            "{10, 20, 30}",
+            "{5, 15}",
+            "{2, 3, 4}"
+        ],
+        "answer_id": 0,
+        "explanation": "La compréhension de set divise chaque élément par 2. Seuls 5, 10 et 15 sont obtenus après division entière."
+    },
+    {
+        "language": "Python",
+        "level": "débutant",
+        "theme": "Compréhensions de listes/dicts/sets",
+        "length": 5,
+        "snippet": "chars = ['x', 'y', 'z']\nindices = {i: c for i, c in enumerate(chars)}\nprint(indices)",
+        "choices": [
+            "{0: 'x', 1: 'y', 2: 'z'}",
+            "{1: 'x', 2: 'y', 3: 'z'}",
+            "{}",
+            "{'x': 0, 'y': 1, 'z': 2}"
+        ],
+        "answer_id": 0,
+        "explanation": "La fonction enumerate associe chaque caractère à son index. Le dictionnaire résultant est {0: 'x', 1: 'y', 2: 'z'}."
+    },
+    {
+        "language": "Python",
+        "level": "débutant",
+        "theme": "Compréhensions de listes/dicts/sets",
+        "length": 5,
+        "snippet": "items = ['bag', 'book', 'bottle']\nlens = {item: len(item) for item in items if 'b' in item}\nprint(lens)",
+        "choices": [
+            "{'bag': 3, 'book': 4, 'bottle': 6}",
+            "{'book': 4}",
+            "{}",
+            "{'bag': 3, 'bottle': 6}"
+        ],
+        "answer_id": 0,
+        "explanation": "La compréhension de dictionnaire garde les éléments contenant 'b' et stocke leur longueur. Tous contiennent 'b'."
+    }
+]
