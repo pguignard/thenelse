@@ -5,7 +5,6 @@ class Snippet(BaseModel):
     language: str = Field(...)
     level: str = Field(...)
     theme: str = Field(...)
-    length: int = Field(...)
     snippet: str = Field(...)
     choices: list[str] = Field(...)
     answer_id: int = Field(..., ge=0)

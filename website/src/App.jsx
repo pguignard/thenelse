@@ -65,7 +65,6 @@ function App() {
           <div><strong>Langage :</strong> {quizData.language}</div>
           <div><strong>Niveau :</strong> {quizData.level}</div>
           <div><strong>Thème :</strong> {quizData.theme}</div>
-          <div><strong>Lignes :</strong> {quizData.length}</div>
         </div>
         {/* Bandeau d'erreur API */}
         {(showApiError || isError) && (

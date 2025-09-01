@@ -1,77 +1,142 @@
 [
     {
         "language": "Python",
-        "level": "débutant",
-        "theme": "Compréhensions de listes/dicts/sets",
-        "length": 5,
-        "snippet": "numbers = [1, 2, 3, 4, 5]\nsquares = {x: x**2 for x in numbers if x % 2 == 0}\nprint(squares)",
+        "level": "expert",
+        "theme": "Méthodes spéciales (__init__, __str__, __repr__...)",
+        "snippet": "class X:\n    def __repr__(self):\n        return f\"<X {self}>\"\n\nprint(repr(X()))",
         "choices": [
-            "{2: 4, 4: 16}",
-            "{1: 1, 4: 16}",
-            "{3: 9, 5: 25}",
-            "{}"
+            "RecursionError",
+            "<X <...>>",
+            "TypeError",
+            "<X object>"
         ],
         "answer_id": 0,
-        "explanation": "La compréhension de dictionnaire filtre les nombres pairs et les met au carré. Seuls 2 et 4 sont pairs."
+        "explanation": "Dans `repr(X())`, Python appelle `X.__repr__`. Cette méthode fait `f\"{self}\"`, qui invoque `format(self)` puis `str(self)`. Or `X` ne définit pas `__str__`, donc `str(self)` redirige vers `__repr__`. On reboucle alors indéfiniment : `__repr__` \u2192 `str` \u2192 `__repr__`\u2026 La pile d\u2019appels d\u00e9borde et Python l\u00e8ve `RecursionError`. Les autres r\u00e9ponses supposent un rendu fini ou un autre type d\u2019erreur, ce qui ne se produit pas ici."
     },
     {
         "language": "Python",
-        "level": "débutant",
-        "theme": "Compréhensions de listes/dicts/sets",
-        "length": 5,
-        "snippet": "words = ['apple', 'banana', 'avocado']\nvowels = {w: w[0] for w in words if w[0] in 'aeiou'}\nprint(vowels)",
+        "level": "expert",
+        "theme": "Méthodes spéciales (__init__, __str__, __repr__...)",
+        "snippet": "class A:\n    def __new__(cls, x):\n        obj = super().__new__(cls)\n        obj.x = x * 2\n        return obj\n    def __init__(self, x):\n        self.x += 1\n    def __str__(self):\n        return str(self.x)\n\nprint(A(3))",
         "choices": [
-            "{'apple': 'a', 'avocado': 'a'}",
-            "{'banana': 'b'}",
-            "{'apple': 'a', 'banana': 'b', 'avocado': 'a'}",
-            "{}"
+            "7",
+            "6",
+            "3",
+            "TypeError"
         ],
         "answer_id": 0,
-        "explanation": "La compréhension de dictionnaire garde les mots commençant par une voyelle. 'apple' et 'avocado' commencent par 'a'."
+        "explanation": "`__new__` s\u2019ex\u00e9cute avant `__init__`. Ici, `__new__` cr\u00e9e l\u2019objet et pose `x` \u00e0 `x*2` (donc 6). Puis `__init__` s\u2019ex\u00e9cute et incr\u00e9mente `self.x` (`6+1=7`). `print(A(3))` appelle `A.__str__`, qui renvoie la cha\u00eene de `self.x`, d\u2019o\u00f9 \"7\". \"6\" oublierait l\u2019effet de `__init__`; \"3\" ignorerait `__new__`; `TypeError` surviendrait si `__init__` renvoyait une valeur non-`None` ou si la signature \u00e9tait incorrecte, ce qui n\u2019est pas le cas."
     },
     {
         "language": "Python",
-        "level": "débutant",
-        "theme": "Compréhensions de listes/dicts/sets",
-        "length": 5,
-        "snippet": "nums = [10, 20, 30]\ndouble = {n // 2 for n in nums}\nprint(double)",
+        "level": "expert",
+        "theme": "Méthodes spéciales (__init__, __str__, __repr__...)",
+        "snippet": "class D:\n    def __str__(self):\n        return \"S\"\n    def __repr__(self):\n        return \"R\"\n\nprint([D()])",
         "choices": [
-            "{5, 10, 15}",
-            "{10, 20, 30}",
-            "{5, 15}",
-            "{2, 3, 4}"
+            "[R]",
+            "[S]",
+            "['S']",
+            "['R']"
         ],
         "answer_id": 0,
-        "explanation": "La compréhension de set divise chaque élément par 2. Seuls 5, 10 et 15 sont obtenus après division entière."
+        "explanation": "Lors de l\u2019affichage d\u2019une liste, Python construit sa repr\u00e9sentation avec `repr(elem)` pour chaque \u00e9l\u00e9ment. Ici `D.__repr__` renvoie \"R\" et `D.__str__` renvoie \"S\". Comme la liste utilise `repr` (pas `str`) pour ses \u00e9l\u00e9ments, le rendu est `[R]`. `\"[S]\"` supposerait l\u2019usage de `str`. `\"['S']\"` et `\"['R']\"` seraient le rendu si l\u2019\u00e9l\u00e9ment \u00e9tait une v\u00e9ritable cha\u00eene (avec guillemets), or c\u2019est un objet dont `__repr__` fournit d\u00e9j\u00e0 le texte \u00e0 ins\u00e9rer."
     },
     {
         "language": "Python",
-        "level": "débutant",
-        "theme": "Compréhensions de listes/dicts/sets",
-        "length": 5,
-        "snippet": "chars = ['x', 'y', 'z']\nindices = {i: c for i, c in enumerate(chars)}\nprint(indices)",
+        "level": "expert",
+        "theme": "Méthodes spéciales (__init__, __str__, __repr__...)",
+        "snippet": "class E:\n    def __init__(self):\n        return 42\n\nprint(E())",
         "choices": [
-            "{0: 'x', 1: 'y', 2: 'z'}",
-            "{1: 'x', 2: 'y', 3: 'z'}",
-            "{}",
-            "{'x': 0, 'y': 1, 'z': 2}"
+            "TypeError",
+            "42",
+            "None",
+            "<__main__.E object>"
         ],
         "answer_id": 0,
-        "explanation": "La fonction enumerate associe chaque caractère à son index. Le dictionnaire résultant est {0: 'x', 1: 'y', 2: 'z'}."
+        "explanation": "`__init__` est un initialiseur et doit **toujours** retourner `None`. Ici il renvoie `42`, ce qui d\u00e9clenche imm\u00e9diatement `TypeError` lors de la cr\u00e9ation de l\u2019instance, avant tout `print`. Aucune repr\u00e9sentation d\u2019objet n\u2019est produite. \"42\" ou \"None\" n\u2019apparaissent jamais, car la valeur de retour de `__init__` n\u2019est pas imprim\u00e9e. Une forme comme `<__main__.E object>` ne peut s\u2019afficher que si l\u2019instanciation r\u00e9ussit, ce qui n\u2019est pas le cas."
     },
     {
         "language": "Python",
-        "level": "débutant",
-        "theme": "Compréhensions de listes/dicts/sets",
-        "length": 5,
-        "snippet": "items = ['bag', 'book', 'bottle']\nlens = {item: len(item) for item in items if 'b' in item}\nprint(lens)",
+        "level": "expert",
+        "theme": "Méthodes spéciales (__init__, __str__, __repr__...)",
+        "snippet": "class Path:\n    def __init__(self, p):\n        self.p = p\n    def __repr__(self):\n        return f\"Path({self.p!r})\"\n    def __str__(self):\n        return self.p.replace(\"\\\\\", \"/\")\n\np = Path(r\"C:\\\\x\\\\y\")\nprint(f\"{p} | {p!r}\")",
         "choices": [
-            "{'bag': 3, 'book': 4, 'bottle': 6}",
-            "{'book': 4}",
-            "{}",
-            "{'bag': 3, 'bottle': 6}"
+            "C:/x/y | Path('C:\\\\x\\\\y')",
+            "C:\\\\x\\\\y | Path('C:/x/y')",
+            "C:/x/y | Path(\"C:/x/y\")",
+            "Path('C:\\\\x\\\\y') | C:/x/y"
         ],
         "answer_id": 0,
-        "explanation": "La compréhension de dictionnaire garde les éléments contenant 'b' et stocke leur longueur. Tous contiennent 'b'."
+        "explanation": "Dans `f\"{p} | {p!r}\"`, la partie gauche appelle `__str__`, qui remplace les antislashs par des `/` \u2192 `C:/x/y`. La partie droite force `repr(p)`, donc `Path.__repr__`. Celle-ci ins\u00e8re `self.p!r`, produisant une cha\u00eene o\u00f9 les antislashs sont \u00e9chapp\u00e9s : `Path('C\\\\x\\\\y')` tel qu\u2019affich\u00e9. Les autres choix inversent l\u2019ordre ou confondent `str` et `repr`, ou modifient la citation du chemin, ce que Python ne fait pas ici."
+    },
+    {
+        "language": "Python",
+        "level": "expert",
+        "theme": "Context managers personnalisés",
+        "snippet": "class M:\n    def __enter__(self):\n        self.t = []\n        return self\n    def __exit__(self, et, ev, tb):\n        if et is ZeroDivisionError:\n            self.t.append(1)\n            return True\n    def f(self): 1/0\n\nwith M() as m:\n    m.f()\n    print(len(m.t))",
+        "choices": [
+            "0",
+            "1",
+            "ZeroDivisionError",
+            "None"
+        ],
+        "answer_id": 1,
+        "explanation": "Dans `with M()`, `m.f()` déclenche `ZeroDivisionError`. Python appelle `__exit__(et, ev, tb)` avec `et is ZeroDivisionError`. Le gestionnaire ajoute un marqueur dans `self.t` et **retourne `True`**, ce qui supprime l'exception. L'exécution continue donc jusqu'au `print(len(m.t))`, qui vaut `1`. Les autres choix sont faux : `0` ignorerait l'ajout, `ZeroDivisionError` aurait fuité si `__exit__` renvoyait `False`, et `None` n'est jamais imprimé."
+    },
+    {
+        "language": "Python",
+        "level": "expert",
+        "theme": "Context managers personnalisés",
+        "snippet": "from contextlib import contextmanager\n\n@contextmanager\ndef T():\n    bag = []\n    try:\n        yield bag\n    finally:\n        bag.clear()\n\nwith T() as d:\n    int(\"NaN\")",
+        "choices": [
+            "0",
+            "ValueError",
+            "NameError",
+            "1"
+        ],
+        "answer_id": 1,
+        "explanation": "Le décorateur `@contextmanager` transforme `T()` en gestionnaire où l'exception levée dans le bloc `with` est renvoyée dans la fonction au niveau du `yield`. Ici, `int(\"NaN\")` lève `ValueError`. Comme le générateur ne l'intercepte pas (pas de `except`), le comportement équivaut à `__exit__` renvoyant `False` : l'exception se propage. Le `finally` nettoie mais ne change pas le flux. Aucun `print` n'est exécuté, donc ni `0` ni `1`. Ce n'est pas `NameError`."
+    },
+    {
+        "language": "Python",
+        "level": "expert",
+        "theme": "Context managers personnalisés",
+        "snippet": "class B:\n    def __enter__(self):\n        return self\n    def __exit__(self, et, ev, tb):\n        raise RuntimeError(\"x\")\n\nwith B():\n    1/0",
+        "choices": [
+            "ZeroDivisionError",
+            "RuntimeError",
+            "1",
+            "TypeError"
+        ],
+        "answer_id": 1,
+        "explanation": "Le corps lève `ZeroDivisionError`, mais `__exit__` s'exécute ensuite. Ici, `__exit__` relance **une autre** exception (`RuntimeError`) au lieu de renvoyer `True`. En Python, une exception émise par `__exit__` remplace l'exception initiale du bloc `with`. C'est donc `RuntimeError` qui sort. Aucune sortie n'est imprimée (pas de `print` atteint), donc ni `1` ni `TypeError`. Ce n'est pas `ZeroDivisionError` : l'exception originale est écrasée."
+    },
+    {
+        "language": "Python",
+        "level": "expert",
+        "theme": "Context managers personnalisés",
+        "snippet": "class R:\n    def __init__(self, s): self.s = s\n    def __enter__(self): self.s.append(\"B\"); return self.s\n    def __exit__(self, *a): self.s.pop()\n\nx = [\"A\"]\nwith R(x) as y:\n    y.append(\"X\")\nprint(\"\".join(x))",
+        "choices": [
+            "AB",
+            "AX",
+            "A",
+            "ABX"
+        ],
+        "answer_id": 0,
+        "explanation": "`__enter__` ajoute \"B\" et retourne la liste partagée. Le bloc `with` ajoute ensuite \"X\". À la sortie, `__exit__` exécute `pop()`, retirant **la dernière** modification (\"X\") et laissant l'effet d'entrée intact. La liste finale est `['A','B']`, donc `print(''.join(x))` affiche `AB`. `AX` correspondrait à l'absence de nettoyage, `A` à l'absence d'ajouts, et `ABX` au cas où `__exit__` ne retirerait rien. Le snippet illustre un rollback ciblé."
+    },
+    {
+        "language": "Python",
+        "level": "expert",
+        "theme": "Context managers personnalisés",
+        "snippet": "class C:\n    def __init__(self): self.ok = False\n    def __enter__(self): return self\n    def __exit__(self, et, ev, tb): return self.ok and et is KeyError\n\nwith C() as c:\n    c.ok = True\n    {}[\"k\"]\nprint(\"done\")",
+        "choices": [
+            "done",
+            "KeyError",
+            "RuntimeError",
+            "DONE"
+        ],
+        "answer_id": 0,
+        "explanation": "`C.__exit__` renvoie `True` uniquement si `self.ok` est vrai **et** que l'exception est un `KeyError`. Le bloc active le drapeau (`c.ok = True`) puis provoque `KeyError` via `{}[\"k\"]`. À la sortie, la condition est satisfaite, `__exit__` renvoie `True` et **supprime** l'erreur ; l'exécution continue jusqu'au `print`, qui affiche `done`. `KeyError` serait attendu si l'exception n'était pas supprimée. `RuntimeError` n'apparaît jamais. `DONE` a une casse différente."
     }
 ]

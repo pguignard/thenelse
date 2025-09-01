@@ -19,3 +19,6 @@ dist/
 # --- Général ---
 .DS_Store
 *.log
+
+# Configuration locale
+.env
