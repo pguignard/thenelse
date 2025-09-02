@@ -1,27 +1,23 @@
 import os
-import json
-from enum import Enum
+from typing import Any, Dict
 
-from fastapi import params
 from pydantic import BaseModel
 from openai import OpenAI
 
-__all__ = ["LLMParams", "get_response_from_llm_client", "PromptType"]
-
-
-class PromptType(str, Enum):
-    TEST = "test"
-    SNIPPET = "snippet"
-    QUIZZ = "quizz"
-
-
-class LLMParams(BaseModel):
-    model: str = "gpt-4.1-nano"
-    prompt: str = "Say Hello"
-    prompt_type: PromptType = PromptType.TEST
-
+from quizz_generator.models import SnippetModel
 
 # Client configuration (get api key from .env local file in the same folder)
+
+
+class RequestParams(BaseModel):
+    model: str
+    prompt: str
+    service_tier: str = "flex"
+
+
+class SnippetBatch(BaseModel):
+    snippets: list[SnippetModel]
+
 
 with open(".env") as f:
     for line in f:
@@ -33,9 +29,51 @@ os.environ["OPENAI_API_KEY"] = api_key
 client = OpenAI()
 
 
-def get_response_from_llm_client(params: LLMParams):
+def to_openai_schema(model: type[BaseModel]) -> Dict[str, Any]:
+    """
+    Convertit un modèle Pydantic en schéma JSON compatible OpenAI.
+    - Ajoute "additionalProperties": False à tous les objets,
+      y compris ceux définis dans $defs.
+    """
+
+    def _patch(schema: Dict[str, Any]) -> Dict[str, Any]:
+        if schema.get("type") == "object":
+            schema["additionalProperties"] = False
+            if "properties" in schema:
+                for sub in schema["properties"].values():
+                    if isinstance(sub, dict):
+                        _patch(sub)
+        elif schema.get("type") == "array" and isinstance(schema.get("items"), dict):
+            _patch(schema["items"])
+
+        # patch récursif dans $defs
+        if "$defs" in schema:
+            for sub in schema["$defs"].values():
+                if isinstance(sub, dict):
+                    _patch(sub)
+
+        return schema
+
+    schema = model.model_json_schema()
+    return _patch(schema)
+
+
+def get_response_from_llm_client(params: RequestParams) -> dict:
+    """Envoie une requête au client LLM et retourne la réponse en dict"""
+    schema = to_openai_schema(SnippetBatch)
+
     response = client.responses.create(
         model=params.model,
         input=params.prompt,
+        service_tier=params.service_tier,
+        text={
+            "format": {
+                "type": "json_schema",
+                "name": "snippet_batch",
+                "schema": schema,
+                "strict": True,
+            }
+        },
     )
-    return response
+
+    return response.to_dict()
