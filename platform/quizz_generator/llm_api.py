@@ -4,7 +4,7 @@ from typing import Any, Dict
 from pydantic import BaseModel
 from openai import OpenAI
 
-from quizz_generator.models import SnippetModel
+from quizz_generator.models import SnippetBatch
 
 # Client configuration (get api key from .env local file in the same folder)
 
@@ -13,10 +13,6 @@ class RequestParams(BaseModel):
     model: str
     prompt: str
     service_tier: str = "flex"
-
-
-class SnippetBatch(BaseModel):
-    snippets: list[SnippetModel]
 
 
 with open(".env") as f:

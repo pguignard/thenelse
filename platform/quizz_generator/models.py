@@ -9,3 +9,7 @@ class SnippetModel(BaseModel):
     choices: list[str]
     answer_id: int
     explanation: str
+
+
+class SnippetBatch(BaseModel):
+    snippets: list[SnippetModel]

@@ -5,11 +5,6 @@ from pathlib import Path
 from quizz_generator.models import SnippetModel
 
 
-def get_json_content_from_response(response: dict) -> dict:
-    content = response.get("output", [])[1].get("content", [])[0].get("text", "")
-    return content
-
-
 def save_snippet_batch_to_ndjson(snippet_batch_json: str, path: Path) -> int:
     """
     Prend en entrée une string JSON représentant un batch de snippets,

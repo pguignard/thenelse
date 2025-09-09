@@ -1,6 +1,13 @@
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { fetchRequestHistoryFileInfos, RequestFileInfo, RequestFileInfosResponse } from '../api/requests';
+import { paths } from '../api/schema';
+import { fetchRequestHistoryFileList } from '../api/requests';
+import RequestViewer from './RequestViewer';
+
+type RequestHistoryFileListResponse =
+    paths['/get_request_history_file_list']['get']['responses']['200']['content']['application/json'];
+
+type FileInfo = RequestHistoryFileListResponse['files'][number];
 
 function formatDate(dateStr: string) {
     const match = dateStr.match(/^(\d{4})(\d{2})(\d{2})_(\d{2})(\d{2})/);
@@ -10,10 +17,10 @@ function formatDate(dateStr: string) {
 }
 
 function RequestView() {
-    const [selectedFile, setSelectedFile] = useState<RequestFileInfo | null>(null);
-    const { data, isLoading, isError } = useQuery<RequestFileInfosResponse>({
+    const [selectedFile, setSelectedFile] = useState<FileInfo | null>(null);
+    const { data, isLoading, isError } = useQuery<RequestHistoryFileListResponse>({
         queryKey: ['requestHistoryFilesInfos'],
-        queryFn: fetchRequestHistoryFileInfos,
+        queryFn: fetchRequestHistoryFileList,
     });
 
     const sortedFiles = data?.files
@@ -43,16 +50,7 @@ function RequestView() {
             </div>
             {/* Détail à droite */}
             <div style={{ flex: 2, padding: '1rem', textAlign: 'left' }}>
-                <h2>Détails</h2>
-                {selectedFile ? (
-                    <div>
-                        <div><strong>Nom du fichier :</strong> {selectedFile.file_name}</div>
-                        <div><strong>Nom de la requête :</strong> {selectedFile.request_name}</div>
-                        <div><strong>Date de création :</strong> {formatDate(selectedFile.created_at)}</div>
-                    </div>
-                ) : (
-                    <div>Sélectionne une requête à gauche</div>
-                )}
+                <RequestViewer fileInfo={selectedFile} />
             </div>
         </div>
     );
