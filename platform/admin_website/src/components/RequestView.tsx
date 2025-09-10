@@ -15,6 +15,10 @@ function formatDate(dateStr: string) {
     const [, , month, day, hour, minute] = match;
     return `${day}/${month} ${hour}:${minute}`;
 }
+function RequestTitle(file: FileInfo | null) {
+    if (!file) return "Sélectionne une requête à gauche";
+    return `${file.request_name} - ${formatDate(file.created_at)}`;
+}
 
 function RequestView() {
     const [selectedFile, setSelectedFile] = useState<FileInfo | null>(null);
@@ -50,7 +54,8 @@ function RequestView() {
             </div>
             {/* Détail à droite */}
             <div style={{ flex: 2, padding: '1rem', textAlign: 'left' }}>
-                <RequestViewer fileInfo={selectedFile} />
+                <h2>{RequestTitle(selectedFile) || 'Détails de la requête'}</h2>
+                {selectedFile && <RequestViewer fileName={selectedFile.file_name} />}
             </div>
         </div>
     );

@@ -177,11 +177,8 @@ def calculate_cost(llm_response: LLMResponse, model: str) -> CostInformations:
         * pricing[model]["output"]
         * COST_PER_CENT
     )
-    reasoning_percent = (
-        (llm_response.reasoning_tokens / llm_response.output_tokens) * 100
-        if llm_response.output_tokens > 0
-        else 0
-    )
+    # Pourcentage du prix de raisonnement par rapport au prix total
+    reasoning_percent = (reasoning_cost / total_cost) * 100 if total_cost > 0 else 0.0
 
     return CostInformations(
         input_cost=round(input_cost, 10),

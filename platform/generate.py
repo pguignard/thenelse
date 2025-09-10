@@ -37,7 +37,7 @@ def main(
         prompt = get_snippet_prompt()
 
     request_params = RequestParams(
-        model="gpt-5-nano",
+        model="gpt-4.1-mini",
         prompt=prompt,
         service_tier="default" if fast else "flex",
     )

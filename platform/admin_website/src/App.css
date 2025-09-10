@@ -10,6 +10,8 @@ h1 {
   margin-bottom: 1rem;
 }
 
+/* === Header Style ==================================== */
+
 header {
   display: flex;
   justify-content: center;
@@ -45,9 +47,11 @@ header button:hover {
   text-align: left;
   background: var(--color-btn-grey);
   border: none;
-  padding: 0.2rem 1rem;
+  padding: 0.5rem 1rem;
   cursor: pointer;
   border-radius: 0;
+  margin: 0;
+  display: flex;
 }
 
 .filelist-button:hover {
@@ -59,10 +63,26 @@ header button:hover {
 }
 
 .filelist-request-name {
+  flex-grow: 1;
   font-weight: bold;
 }
 
 .filelist-date {
   font-size: 0.9em;
   color: #888;
+}
+
+/* === RequestViewer components ==================================== */
+
+
+.monospace-textarea {
+  width: 100%;
+  min-height: 800px;
+  font-family: monospace;
+  font-size: 0.8rem;
+  resize: vertical;
+  background: #fafafa;
+  border: 1px solid #ddd;
+  padding: 0.5rem;
+  box-sizing: border-box;
 }

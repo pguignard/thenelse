@@ -21,10 +21,10 @@ def get_snippet_prompt() -> str:
     data = SnippetParams(
         level=level,
         theme=theme,
-        snippet_count=1,
+        snippet_count=5,
     )
 
-    return user_prompt.format(
+    return system_prompt + user_prompt.format(
         LANGUAGE=data.language,
         LEVEL=data.level,
         THEME=data.theme,

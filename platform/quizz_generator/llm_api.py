@@ -62,6 +62,9 @@ def get_response_from_llm_client(params: RequestParams) -> dict:
         model=params.model,
         input=params.prompt,
         service_tier=params.service_tier,
+        # reasoning={
+        #     "effort": "minimal",
+        # },
         text={
             "format": {
                 "type": "json_schema",

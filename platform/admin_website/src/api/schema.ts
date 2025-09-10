@@ -87,8 +87,8 @@ export interface paths {
 export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
-        /** CostInfo */
-        CostInfo: {
+        /** CostInformations */
+        CostInformations: {
             /**
              * Input Cost
              * @default 0
@@ -114,11 +114,6 @@ export interface components {
              * @default 0
              */
             total_cost: number;
-            /**
-             * Total Cost Per Cent
-             * @default 0
-             */
-            total_cost_per_cent: number;
         };
         /** FileInfo */
         FileInfo: {
@@ -136,15 +131,30 @@ export interface components {
         };
         /** LLMResponse */
         LLMResponse: {
-            /** Model */
+            /**
+             * Model
+             * @default
+             */
             model: string;
-            /** Temperature */
+            /**
+             * Temperature
+             * @default 0
+             */
             temperature: number;
-            /** Service Tier */
+            /**
+             * Service Tier
+             * @default
+             */
             service_tier: string;
-            /** Input Tokens */
+            /**
+             * Input Tokens
+             * @default 0
+             */
             input_tokens: number;
-            /** Output Tokens */
+            /**
+             * Output Tokens
+             * @default 0
+             */
             output_tokens: number;
             /**
              * Reasoning Tokens
@@ -159,28 +169,33 @@ export interface components {
         };
         /** RequestInformations */
         RequestInformations: {
-            /** Snippet Batch */
-            snippet_batch: {
-                [key: string]: unknown;
-            }[];
-            request_input: components["schemas"]["RequestInput"];
-            llm_response: components["schemas"]["LLMResponse"];
-            cost_info: components["schemas"]["CostInfo"];
-        };
-        /** RequestInput */
-        RequestInput: {
-            /** Model */
+            /**
+             * Is Valid
+             * @default true
+             */
+            is_valid: boolean;
+            /**
+             * Validity Error
+             * @default
+             */
+            validity_error: string;
+            /**
+             * Model
+             * @default
+             */
             model: string;
-            /** Language */
-            language: string;
-            /** Level */
-            level: string;
-            /** Theme */
-            theme: string;
-            /** Snippet Count */
-            snippet_count: number;
-            /** Prompt */
-            prompt?: string;
+            /**
+             * Prompt
+             * @default
+             */
+            prompt: string;
+            /**
+             * Response Content
+             * @default
+             */
+            response_content: string;
+            llm_response: components["schemas"]["LLMResponse"];
+            cost_info: components["schemas"]["CostInformations"];
         };
         /** ValidationError */
         ValidationError: {

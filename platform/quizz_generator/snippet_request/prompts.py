@@ -15,25 +15,52 @@ Règles des réponses :
 - Les mauvaises réponses restent plausibles.
 - Explication en Markdown (≈500 caractères ±50%), claire et concise.
 
-Sortie attendue : uniquement un JSON valide, sans texte additionnel, de la forme :
-[
-{{
-  "snippet": "CODE ICI",
-  "choices": ["SORTIE1", "SORTIE2", "SORTIE3", "SORTIE4"],
-  "answer_id": 0,
-  "explanation": "..."
-}},
-{{...}}
-]
+Sortie attendue : uniquement un JSON valide, sans texte additionnel.
 Rappels machine :
 - Sortie attendue : JSON brut, compact, sans indentation ni retour à la ligne.
 - Échapper correctement les caractères spéciaux dans "snippet" et "text".
+
+Format de sortie JSON :
+{
+  "snippets": [
+    {
+      "language": "{LANGUAGE}",
+      "level": "{LEVEL}",
+      "theme": "{THEME}",
+      "snippet": "string",
+      "choices": ["string", "string", "string", "string"],
+      "answer_id": int (0-3),
+      "explanation": "string"
+    },
+    ...
+  ]
+}
 """
 
 user_prompt = """
-Paramètres :
+Génère {SNIPPETS_COUNT} snippets de code au format JSON, chacun avec 4 réponses possibles, une bonne réponse et une explication.
 - Langage : {LANGUAGE}
 - Niveau : {LEVEL}
 - Thème : {THEME}
-- Nombre de snippets à générer : {SNIPPETS_COUNT}
+Respecte strictement les règles définies dans le prompt système.
+Respecte scrupuleusement le nombre de snippets demandé: {SNIPPETS_COUNT}.
+"""
+
+snippet_response_example = """
+{
+  "snippets": [
+    {
+      "language": "Python",
+      "level": "beginner",
+      "theme": "Variables de base",
+      "snippet": "x = 5\ny = x + 3\nprint(y)",
+      "choices": ["5", "8", "10", "Error"],
+      "answer_id": 1,
+      "explanation": "La variable x vaut 5, on ajoute 3, donc y vaut 8."
+    },
+    {
+    ...
+    }
+  ]
+}
 """
