@@ -12,16 +12,30 @@ body {
   min-width: 320px;
   min-height: 100vh;
   background-color: var(--color-bg-white);
+  color: var(--black);
 }
 
 :root {
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 
-  --color-bg-white: #ffffff;
+  --white: #ffffff;
+  --black: #000000;
+  --light-grey: #fafafa;
+  --medium-grey: #f0f0f0;
+  --dark-grey: #ddd;
+  --darker-grey: #888;
 
-  --color-btn-grey: #fafafa;
-  --color-btn-darkgrey: #f0f0f0;
-  --color-btn-lightpink: #ffe0f0;
-  --color-btn-border-grey: #d8d8d8;
-  --color-btn-border-pink: #ffaed8;
+  /* THEME ROSE */
+  /* --main-color-light: #ffe0f0;
+  --main-color-dark: #ffaed8; */
+
+  /* THEME BLEU */
+  --main-color-light: #e0f0ff;
+  --main-color-dark: #c5e3ff;
+
+  --color-bg-white: var(--white);
+
+  --button-bg: var(--light-grey);
+  --button-bg-hover: var(--main-color-light);
+  --button-bg-selected: var(--main-color-dark);
 }

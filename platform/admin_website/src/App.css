@@ -7,7 +7,7 @@
 
 h1 {
   font-size: 2rem;
-  margin-bottom: 1rem;
+  margin: 0;
 }
 
 /* === Header Style ==================================== */
@@ -15,22 +15,36 @@ h1 {
 header {
   display: flex;
   justify-content: center;
-  margin-bottom: 1rem;
+  width: fit-content;
+  white-space: nowrap;
 }
 
-header button {
-  border: 2px solid var(--color-btn-border-grey);
-  background-color: var(--color-btn-grey);
-  border-radius: 4px;
+.header-button {
+  width: 10%;
+  font-size: 1.3rem;
+}
+
+/* === Common button ==================================== */
+
+.button {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: var(--button-bg);
   padding: 0.5rem 1rem;
-  margin: 0 0.5rem;
   cursor: pointer;
-  transition: background-color 0.5s ease;
+  margin: 0;
+  display: flex;
+  border: 0;
 }
 
-header button:hover {
-  border: 2px solid var(--color-btn-border-pink);
-  background-color: var(--color-btn-lightpink);
+.button:hover {
+  background-color: var(--button-bg-hover);
+}
+
+.button.selected {
+  transition: ease-in 0.1s;
+  background: var(--button-bg-selected);
 }
 
 /* === RequestView components ==================================== */
@@ -39,27 +53,6 @@ header button:hover {
   list-style: none;
   padding: 0;
   margin: 0;
-}
-
-.filelist-button {
-  display: block;
-  width: 100%;
-  text-align: left;
-  background: var(--color-btn-grey);
-  border: none;
-  padding: 0.5rem 1rem;
-  cursor: pointer;
-  border-radius: 0;
-  margin: 0;
-  display: flex;
-}
-
-.filelist-button:hover {
-  background: var(--color-btn-darkgrey);
-}
-
-.filelist-button.selected {
-  background: var(--color-btn-lightpink);
 }
 
 .filelist-request-name {
@@ -74,15 +67,25 @@ header button:hover {
 
 /* === RequestViewer components ==================================== */
 
-
 .monospace-textarea {
   width: 100%;
   min-height: 800px;
   font-family: monospace;
   font-size: 0.8rem;
   resize: vertical;
-  background: #fafafa;
-  border: 1px solid #ddd;
+  background-color: var(--light-grey);
+  border: 1px solid var(--medium-grey);
   padding: 0.5rem;
   box-sizing: border-box;
+}
+
+.snippet-pre {
+  border: 1px solid var(--medium-grey);
+  padding: 0.5rem;
+  white-space: pre-wrap;
+  word-break: break-word;
+  max-width: 100%;
+  /* optionnel: pour éviter le débordement vertical */
+  overflow-x: auto;
+  background-color: var(--light-grey);
 }

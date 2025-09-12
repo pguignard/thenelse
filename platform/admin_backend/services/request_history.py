@@ -133,7 +133,22 @@ def check_file_validity(file_content_dict: dict) -> bool:
 
 
 def get_response_content(file_content_dict: dict) -> str:
-    return file_content_dict["response"]["output"][1]["content"][0]["text"]
+    """Extrait le contenu textuel de la réponse LLM du contenu du fichier."""
+    output_list = file_content_dict["response"]["output"]
+    """
+    Structure de la réponse: 
+    ["response"]["output"] -> liste de dicts d'output, dont un "reasoning" et un "text" pour gpt-5, ou juste un "text" pour gpt-4.1
+    On exclut l'output de type "reasoning"
+    Sinon on regarde le champs content (liste), qui contient un dict avec un champs "text" et un champs "type" qui est égal à "output_text"
+    """
+    for output in output_list:
+        if output.get("type") == "reasoning":
+            continue
+        content = output.get("content", None)
+
+    for item in content:
+        if item.get("type") == "output_text":
+            return item.get("text", "")
 
 
 def get_llm_response(file_content_dict: dict) -> LLMResponse:
@@ -154,6 +169,8 @@ def calculate_cost(llm_response: LLMResponse, model: str) -> CostInformations:
         "gpt-5-nano": {"input": 0.05, "output": 0.40},
         "gpt-5-mini": {"input": 0.25, "output": 2.00},
         "gpt-4.1-nano": {"input": 0.10, "output": 0.40},
+        "gpt-4.1-mini": {"input": 0.40, "output": 1.60},
+        "gpt-4o-mini": {"input": 0.15, "output": 0.60},
     }
     # For cent conversion
     COST_PER_CENT = 100

@@ -20,21 +20,6 @@ Rappels machine :
 - Sortie attendue : JSON brut, compact, sans indentation ni retour à la ligne.
 - Échapper correctement les caractères spéciaux dans "snippet" et "text".
 
-Format de sortie JSON :
-{
-  "snippets": [
-    {
-      "language": "{LANGUAGE}",
-      "level": "{LEVEL}",
-      "theme": "{THEME}",
-      "snippet": "string",
-      "choices": ["string", "string", "string", "string"],
-      "answer_id": int (0-3),
-      "explanation": "string"
-    },
-    ...
-  ]
-}
 """
 
 user_prompt = """

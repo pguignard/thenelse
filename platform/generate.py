@@ -21,13 +21,13 @@ app = typer.Typer()
 @app.command()
 def main(
     test: bool = typer.Option(False, help="Prompt de test (hello)"),
-    fast: bool = typer.Option(False, help="Désactive le mode flex"),
+    flex: bool = typer.Option(False, help="Active le mode flex"),
     request_name: str = typer.Option(..., help="Nom de la requête (file name)"),
 ):
     """Génère des requêtes vers le LLM et sauvegarde les réponses dans des fichiers JSON.
 
     - Si --test est activé, utilise un prompt simple.
-    - Si --fast est activé, utilise le service_tier 'default', sinon, 'flex'.
+    - Si --flex est activé, utilise le service_tier 'flex' (plus lent, moins cher).
     - Le nom de la requête est obligatoire et sert à nommer le fichier de sortie.
     """
 
@@ -37,9 +37,9 @@ def main(
         prompt = get_snippet_prompt()
 
     request_params = RequestParams(
-        model="gpt-4.1-mini",
+        model="gpt-4o-mini",
         prompt=prompt,
-        service_tier="default" if fast else "flex",
+        service_tier="default" if not flex else "flex",
     )
 
     # Envoi de la requête à l'API LLM

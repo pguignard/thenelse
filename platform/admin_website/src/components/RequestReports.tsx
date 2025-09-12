@@ -20,7 +20,7 @@ function RequestTitle(file: FileInfo | null) {
     return `${file.request_name} - ${formatDate(file.created_at)}`;
 }
 
-function RequestView() {
+function RequestReports() {
     const [selectedFile, setSelectedFile] = useState<FileInfo | null>(null);
     const { data, isLoading, isError } = useQuery<RequestHistoryFileListResponse>({
         queryKey: ['requestHistoryFilesInfos'],
@@ -42,7 +42,7 @@ function RequestView() {
                     {sortedFiles?.map((file) => (
                         <li key={file.file_name}>
                             <button
-                                className={`filelist-button${selectedFile?.file_name === file.file_name ? ' selected' : ''}`}
+                                className={`button${selectedFile?.file_name === file.file_name ? ' selected' : ''}`}
                                 onClick={() => setSelectedFile(file)}
                             >
                                 <div className="filelist-request-name">{file.request_name}</div>
@@ -61,4 +61,4 @@ function RequestView() {
     );
 }
 
-export default RequestView;
+export default RequestReports;

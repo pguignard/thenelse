@@ -3,6 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { fetchRequestInformation } from '../api/requests';
 import { paths, components } from '../api/schema';
 import { RequestInformations } from './RequestInformations';
+import { SnippetsDataViewer } from './SnippetsDataViewer';
 
 type RequestInformationResponse =
     paths['/get_request_information']['get']['responses']['200']['content']['application/json'];
@@ -31,28 +32,15 @@ function RequestViewer({ fileName }: RequestViewerProps) {
         enabled: !!fileName,
     });
 
-    // Formattage de la réponse JSON pour une meilleure lisibilité
-    // On essaie de parser en JSON, si ça marche on re-stringify avec indentation
-    // Sinon on affiche tel quel (utile pour les réponses qui ne sont pas du JSON)
-    //
-    function formatLLMResponse(response_content: string | '') {
-        let formattedContent = response_content || '';
-        try {
-            formattedContent = JSON.stringify(JSON.parse(response_content), null, 2);
-        } catch {
-            // Si ce n'est pas un JSON valide, on laisse tel quel
-        }
-        return formattedContent;
-    }
 
     return (
         <div>
-            <div style={{ display: 'flex', marginBottom: '3rem' }}>
+            <div style={{ display: 'flex', marginBottom: '2rem' }}>
                 {VIEW_LABELS.map(({ key, label }) => (
                     <button
                         key={key}
                         onClick={() => setActiveView(key)}
-                        className={`filelist-button${activeView === key ? ' selected' : ''}`}
+                        className={`button${activeView === key ? ' selected' : ''}`}
                     >
                         {label}
                     </button>
@@ -73,12 +61,8 @@ function RequestViewer({ fileName }: RequestViewerProps) {
                             className="monospace-textarea"
                         />
                     )}
-                    {activeView === 'response_content' && (
-                        <textarea
-                            value={formatLLMResponse(data.response_content) || ''}
-                            readOnly
-                            className="monospace-textarea"
-                        />
+                    {activeView === 'response_content' && data && (
+                        <SnippetsDataViewer responseContent={data.response_content || ''} />
                     )}
                 </div>
             )}
