@@ -8,12 +8,9 @@ import typer
 from quizz_generator.snippet_request.prompt_builder import get_snippet_prompt
 
 from quizz_generator.llm_api import get_response_from_llm_client, RequestParams
-from quizz_generator.snippet_to_json_data import (
-    save_snippet_batch_to_ndjson,
-)
 
-REQUESTS_OUTPUT_DIR = "request_history"
-NDJSON_OUTPUT_DIR = "ndjson_snippets"
+
+REQUESTS_OUTPUT_DIR = "request_history/test"
 
 app = typer.Typer()
 
@@ -63,20 +60,6 @@ def main(
     # Sauvegarder les données dans un fichier JSON
     with open(file_name, "w", encoding="utf-8") as f:
         json.dump(request_report, f, indent=2, ensure_ascii=False)
-
-    # ----------------------------------------------------------------------------------
-    # Traitement de la réponse, stockage des snippets en ndjson
-    # à activer plus tard :)
-
-    if True:
-        return
-
-    output_dir = Path(NDJSON_OUTPUT_DIR)
-    output_dir.mkdir(parents=True, exist_ok=True)
-    save_snippet_batch_to_ndjson(
-        snippet_batch,
-        output_dir / f"output_{request_name}_{timestamp}.ndjson",
-    )
 
 
 if __name__ == "__main__":

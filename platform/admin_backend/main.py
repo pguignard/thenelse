@@ -1,16 +1,21 @@
 from fastapi import FastAPI
-from pathlib import Path
 from fastapi.middleware.cors import CORSMiddleware
+import logging
+
+
+logger = logging.getLogger("uvicorn.error")  # erreurs serveur
+access_logger = logging.getLogger("uvicorn.access")  # logs HTTP
 
 from admin_backend.services.request_history import (
-    get_request_history_file_list,
-    RequestHistoryFileListResponse,
+    get_request_history_folder_list,
+    RHFolderListResponse,
+    get_request_history_folder_content,
+    RHFolderContentResponse,
+)
+from admin_backend.services.request_information import (
     get_request_informations,
     RequestInformations,
 )
-
-BASE_DIR = Path(__file__).parent.parent
-ndjson_dir = BASE_DIR / "ndjson_snippets"
 
 app = FastAPI()
 app.add_middleware(
@@ -22,33 +27,31 @@ app.add_middleware(
 )
 
 
+# Health check
 @app.get("/health")
 def health_check():
+    logger.info("Logger health check")
     return {"status": "healthy"}
 
 
 # Request History files and content
+@app.get("/get_request_history_folder_list")
+def get_request_history_folder_list_route() -> RHFolderListResponse:
+    """Retourne la liste des dossiers dans le dossier platform/request_history"""
+    return get_request_history_folder_list()
 
 
-@app.get("/get_request_history_file_list")
-def get_request_history_file_list_route() -> RequestHistoryFileListResponse:
-    """Liste les fichiers dans le dossier platform/request_history
-    Envoie la liste des noms de fichiers dans une seule réponse"""
-    return get_request_history_file_list()
+@app.get("/get_request_history_folder_content")
+def get_request_history_folder_content_route(
+    folder_name: str,
+) -> RHFolderContentResponse:
+    """Retourne le contenu d'un dossier spécifique dans le dossier platform/request_history"""
+    return get_request_history_folder_content(folder_name)
 
 
 @app.get("/get_request_information")
-def get_request_information_route(file_name: str) -> RequestInformations:
+def get_request_information_route(
+    folder_name: str, file_name: str
+) -> RequestInformations:
     """Récupère le contenu d'un fichier spécifique dans le dossier platform/request_history"""
-    return get_request_informations(file_name)
-
-
-# NDJSON Snippets
-
-
-@app.get("/get_ndjson_snippets_file_list")
-def get_ndjson_snippets_file_list():
-    """Liste les fichiers dans le dossier platform/ndjson_snippets
-    Envoie la liste des noms de fichiers dans une seule réponse"""
-    files = ndjson_dir.glob("*.ndjson")
-    return {"files": [f.name for f in files]}
+    return get_request_informations(folder_name, file_name)

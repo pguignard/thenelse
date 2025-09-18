@@ -21,7 +21,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/get_request_history_file_list": {
+    "/get_request_history_folder_list": {
         parameters: {
             query?: never;
             header?: never;
@@ -29,11 +29,30 @@ export interface paths {
             cookie?: never;
         };
         /**
-         * Get Request History File List Route
-         * @description Liste les fichiers dans le dossier platform/request_history
-         *     Envoie la liste des noms de fichiers dans une seule réponse
+         * Get Request History Folder List Route
+         * @description Retourne la liste des dossiers dans le dossier platform/request_history
          */
-        get: operations["get_request_history_file_list_route_get_request_history_file_list_get"];
+        get: operations["get_request_history_folder_list_route_get_request_history_folder_list_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/get_request_history_folder_content": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get Request History Folder Content Route
+         * @description Retourne le contenu d'un dossier spécifique dans le dossier platform/request_history
+         */
+        get: operations["get_request_history_folder_content_route_get_request_history_folder_content_get"];
         put?: never;
         post?: never;
         delete?: never;
@@ -54,27 +73,6 @@ export interface paths {
          * @description Récupère le contenu d'un fichier spécifique dans le dossier platform/request_history
          */
         get: operations["get_request_information_route_get_request_information_get"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/get_ndjson_snippets_file_list": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Get Ndjson Snippets File List
-         * @description Liste les fichiers dans le dossier platform/ndjson_snippets
-         *     Envoie la liste des noms de fichiers dans une seule réponse
-         */
-        get: operations["get_ndjson_snippets_file_list_get_ndjson_snippets_file_list_get"];
         put?: never;
         post?: never;
         delete?: never;
@@ -124,6 +122,15 @@ export interface components {
             /** Created At */
             created_at: string;
         };
+        /** FolderInfo */
+        FolderInfo: {
+            /** Folder Name */
+            folder_name: string;
+            /** Files Count */
+            files_count: number;
+            /** Total Size Kb */
+            total_size_kb: number;
+        };
         /** HTTPValidationError */
         HTTPValidationError: {
             /** Detail */
@@ -162,10 +169,64 @@ export interface components {
              */
             reasoning_tokens: number;
         };
-        /** RequestHistoryFileListResponse */
-        RequestHistoryFileListResponse: {
-            /** Files */
-            files: components["schemas"]["FileInfo"][];
+        /** MultiRequestInformation */
+        MultiRequestInformation: {
+            /**
+             * File List
+             * @default []
+             */
+            file_list: string[];
+            /**
+             * Files Count
+             * @default 0
+             */
+            files_count: number;
+            /**
+             * Invalid Files Count
+             * @default 0
+             */
+            invalid_files_count: number;
+            /**
+             * Models
+             * @default []
+             */
+            models: string[];
+            /**
+             * Input Tokens
+             * @default 5
+             */
+            input_tokens: number;
+            /**
+             * Output Tokens
+             * @default 0
+             */
+            output_tokens: number;
+            /**
+             * Input Cost
+             * @default 0
+             */
+            input_cost: number;
+            /**
+             * Output Cost
+             * @default 0
+             */
+            output_cost: number;
+            /**
+             * Total Cost
+             * @default 0
+             */
+            total_cost: number;
+        };
+        /** RHFolderContentResponse */
+        RHFolderContentResponse: {
+            /** Files Infos */
+            files_infos: components["schemas"]["FileInfo"][];
+            folder_info: components["schemas"]["MultiRequestInformation"];
+        };
+        /** RHFolderListResponse */
+        RHFolderListResponse: {
+            /** Folders */
+            folders: components["schemas"]["FolderInfo"][];
         };
         /** RequestInformations */
         RequestInformations: {
@@ -235,7 +296,7 @@ export interface operations {
             };
         };
     };
-    get_request_history_file_list_route_get_request_history_file_list_get: {
+    get_request_history_folder_list_route_get_request_history_folder_list_get: {
         parameters: {
             query?: never;
             header?: never;
@@ -250,7 +311,38 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["RequestHistoryFileListResponse"];
+                    "application/json": components["schemas"]["RHFolderListResponse"];
+                };
+            };
+        };
+    };
+    get_request_history_folder_content_route_get_request_history_folder_content_get: {
+        parameters: {
+            query: {
+                folder_name: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RHFolderContentResponse"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
                 };
             };
         };
@@ -258,6 +350,7 @@ export interface operations {
     get_request_information_route_get_request_information_get: {
         parameters: {
             query: {
+                folder_name: string;
                 file_name: string;
             };
             header?: never;
@@ -282,26 +375,6 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
-        };
-    };
-    get_ndjson_snippets_file_list_get_ndjson_snippets_file_list_get: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": unknown;
                 };
             };
         };
