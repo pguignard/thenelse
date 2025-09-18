@@ -47,6 +47,18 @@ header {
   background: var(--button-bg-selected);
 }
 
+.selector {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border: 1px solid var(--medium-grey);
+  border-radius: 6px;
+  background-color: white;
+  cursor: pointer;
+  margin-bottom: 1rem;
+}
+
+
 /* === RequestView components ==================================== */
 
 .filelist {

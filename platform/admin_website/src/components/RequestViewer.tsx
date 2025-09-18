@@ -1,15 +1,12 @@
 import { useState } from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { fetchRequestInformation } from '../api/requests';
-import { paths, components } from '../api/schema';
+import { useRequestInformation } from '../api/hooks';
+import { RequestInformationsResponse } from '../api/requests';
 import { RequestInformations } from './RequestInformations';
 import { SnippetsDataViewer } from './SnippetsDataViewer';
 
-type RequestInformationResponse =
-    paths['/get_request_information']['get']['responses']['200']['content']['application/json'];
-
 interface RequestViewerProps {
     fileName: string | null;
+    folderName: string | null;
 }
 
 const VIEW_LABELS = [
@@ -19,19 +16,10 @@ const VIEW_LABELS = [
 ] as const;
 type ViewKey = typeof VIEW_LABELS[number]['key'];
 
-type CostInformations = components['schemas']['CostInformations'];
-type LLMResponse = components['schemas']['LLMResponse'];
-
-
-function RequestViewer({ fileName }: RequestViewerProps) {
+function RequestViewer({ fileName, folderName }: RequestViewerProps) {
     const [activeView, setActiveView] = useState<ViewKey>('request_informations');
 
-    const { data, isLoading, isError } = useQuery<RequestInformationResponse>({
-        queryKey: ['requestInformation', fileName],
-        queryFn: () => fetchRequestInformation(fileName as string),
-        enabled: !!fileName,
-    });
-
+    const { data, isLoading, isError } = useRequestInformation(fileName, folderName);
 
     return (
         <div>
@@ -51,7 +39,7 @@ function RequestViewer({ fileName }: RequestViewerProps) {
             {!fileName && <div>Sélectionne une requête à gauche</div>}
             {data && fileName && (
                 <div>
-                    {activeView === 'request_informations' && data && (
+                    {activeView === 'request_informations' && (
                         <RequestInformations cost={data.cost_info} llm={data.llm_response} />
                     )}
                     {activeView === 'prompt' && (
@@ -61,7 +49,7 @@ function RequestViewer({ fileName }: RequestViewerProps) {
                             className="monospace-textarea"
                         />
                     )}
-                    {activeView === 'response_content' && data && (
+                    {activeView === 'response_content' && (
                         <SnippetsDataViewer responseContent={data.response_content || ''} />
                     )}
                 </div>

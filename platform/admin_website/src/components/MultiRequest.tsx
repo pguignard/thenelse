@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 
-function RequestLauncher() {
+function MultiRequest() {
 
     return (
         <div>
-            Request Launcher... to be implemented :)
+            Multi Request... to be implemented :)
         </div>
     );
 }
 
-export default RequestLauncher;
+export default MultiRequest;

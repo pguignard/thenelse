@@ -86,7 +86,7 @@ export function SnippetsDataViewer({ responseContent }: SnippetsDataViewerProps)
     return (
         <div>
             <div style={{ marginBottom: '1rem' }}>
-                <select value={mode} onChange={e => setMode(e.target.value as ViewMode)}>
+                <select value={mode} onChange={e => setMode(e.target.value as ViewMode)} className="button selector">
                     {VIEW_MODES.map(({ key, label }) => (
                         <option key={key} value={key}>{label}</option>
                     ))}
