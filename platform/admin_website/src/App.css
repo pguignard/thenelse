@@ -5,12 +5,12 @@
   text-align: center;
 }
 
+/* === Header Style ==================================== */
+
 h1 {
   font-size: 2rem;
   margin: 0;
 }
-
-/* === Header Style ==================================== */
 
 header {
   display: flex;
@@ -58,8 +58,14 @@ header {
   margin-bottom: 1rem;
 }
 
+/* === Left Panel, filelist ==================================== */
 
-/* === RequestView components ==================================== */
+.filelist-container {
+  flex: 1;
+  border-right: 1px solid #ddd;
+  padding: 1rem;
+  text-align: left;
+}
 
 .filelist {
   list-style: none;
@@ -75,6 +81,24 @@ header {
 .filelist-date {
   font-size: 0.9em;
   color: #888;
+}
+
+/* === Right Panel, details ==================================== */
+
+.right-panel {
+  flex: 2;
+  padding: 1rem;
+  text-align: left;
+}
+
+.right-panel h2 {
+  padding: 0.5rem 1rem;
+  font-size: 1.6rem;
+  border: 1px solid var(--medium-grey);
+  border-radius: 6px;
+  background-color: var(--light-grey);
+  margin-bottom: 2rem;
+  margin-top: 0;
 }
 
 /* === RequestViewer components ==================================== */

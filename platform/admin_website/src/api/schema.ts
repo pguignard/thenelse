@@ -4,379 +4,379 @@
  */
 
 export interface paths {
-    "/health": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Health Check */
-        get: operations["health_check_health_get"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+  "/health": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/get_request_history_folder_list": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Get Request History Folder List Route
-         * @description Retourne la liste des dossiers dans le dossier platform/request_history
-         */
-        get: operations["get_request_history_folder_list_route_get_request_history_folder_list_get"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    /** Health Check */
+    get: operations["health_check_health_get"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/get_request_history_folder_list": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/get_request_history_folder_content": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Get Request History Folder Content Route
-         * @description Retourne le contenu d'un dossier spécifique dans le dossier platform/request_history
-         */
-        get: operations["get_request_history_folder_content_route_get_request_history_folder_content_get"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    /**
+     * Get Request History Folder List Route
+     * @description Retourne la liste des dossiers dans le dossier platform/request_history
+     */
+    get: operations["get_request_history_folder_list_route_get_request_history_folder_list_get"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/get_request_history_folder_content": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/get_request_information": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Get Request Information Route
-         * @description Récupère le contenu d'un fichier spécifique dans le dossier platform/request_history
-         */
-        get: operations["get_request_information_route_get_request_information_get"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    /**
+     * Get Request History Folder Content Route
+     * @description Retourne le contenu d'un dossier spécifique dans le dossier platform/request_history
+     */
+    get: operations["get_request_history_folder_content_route_get_request_history_folder_content_get"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/get_request_information": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
+    /**
+     * Get Request Information Route
+     * @description Récupère le contenu d'un fichier spécifique dans le dossier platform/request_history
+     */
+    get: operations["get_request_information_route_get_request_information_get"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
 }
 export type webhooks = Record<string, never>;
 export interface components {
-    schemas: {
-        /** CostInformations */
-        CostInformations: {
-            /**
-             * Input Cost
-             * @default 0
-             */
-            input_cost: number;
-            /**
-             * Output Cost
-             * @default 0
-             */
-            output_cost: number;
-            /**
-             * Reasoning Cost
-             * @default 0
-             */
-            reasoning_cost: number;
-            /**
-             * Reasoning Percent
-             * @default 0
-             */
-            reasoning_percent: number;
-            /**
-             * Total Cost
-             * @default 0
-             */
-            total_cost: number;
-        };
-        /** FileInfo */
-        FileInfo: {
-            /** File Name */
-            file_name: string;
-            /** Request Name */
-            request_name: string;
-            /** Created At */
-            created_at: string;
-        };
-        /** FolderInfo */
-        FolderInfo: {
-            /** Folder Name */
-            folder_name: string;
-            /** Files Count */
-            files_count: number;
-            /** Total Size Kb */
-            total_size_kb: number;
-        };
-        /** HTTPValidationError */
-        HTTPValidationError: {
-            /** Detail */
-            detail?: components["schemas"]["ValidationError"][];
-        };
-        /** LLMResponse */
-        LLMResponse: {
-            /**
-             * Model
-             * @default
-             */
-            model: string;
-            /**
-             * Temperature
-             * @default 0
-             */
-            temperature: number;
-            /**
-             * Service Tier
-             * @default
-             */
-            service_tier: string;
-            /**
-             * Input Tokens
-             * @default 0
-             */
-            input_tokens: number;
-            /**
-             * Output Tokens
-             * @default 0
-             */
-            output_tokens: number;
-            /**
-             * Reasoning Tokens
-             * @default 0
-             */
-            reasoning_tokens: number;
-        };
-        /** MultiRequestInformation */
-        MultiRequestInformation: {
-            /**
-             * File List
-             * @default []
-             */
-            file_list: string[];
-            /**
-             * Files Count
-             * @default 0
-             */
-            files_count: number;
-            /**
-             * Invalid Files Count
-             * @default 0
-             */
-            invalid_files_count: number;
-            /**
-             * Models
-             * @default []
-             */
-            models: string[];
-            /**
-             * Input Tokens
-             * @default 5
-             */
-            input_tokens: number;
-            /**
-             * Output Tokens
-             * @default 0
-             */
-            output_tokens: number;
-            /**
-             * Input Cost
-             * @default 0
-             */
-            input_cost: number;
-            /**
-             * Output Cost
-             * @default 0
-             */
-            output_cost: number;
-            /**
-             * Total Cost
-             * @default 0
-             */
-            total_cost: number;
-        };
-        /** RHFolderContentResponse */
-        RHFolderContentResponse: {
-            /** Files Infos */
-            files_infos: components["schemas"]["FileInfo"][];
-            folder_info: components["schemas"]["MultiRequestInformation"];
-        };
-        /** RHFolderListResponse */
-        RHFolderListResponse: {
-            /** Folders */
-            folders: components["schemas"]["FolderInfo"][];
-        };
-        /** RequestInformations */
-        RequestInformations: {
-            /**
-             * Is Valid
-             * @default true
-             */
-            is_valid: boolean;
-            /**
-             * Validity Error
-             * @default
-             */
-            validity_error: string;
-            /**
-             * Model
-             * @default
-             */
-            model: string;
-            /**
-             * Prompt
-             * @default
-             */
-            prompt: string;
-            /**
-             * Response Content
-             * @default
-             */
-            response_content: string;
-            llm_response: components["schemas"]["LLMResponse"];
-            cost_info: components["schemas"]["CostInformations"];
-        };
-        /** ValidationError */
-        ValidationError: {
-            /** Location */
-            loc: (string | number)[];
-            /** Message */
-            msg: string;
-            /** Error Type */
-            type: string;
-        };
+  schemas: {
+    /** CostInformations */
+    CostInformations: {
+      /**
+       * Input Cost
+       * @default 0
+       */
+      input_cost: number;
+      /**
+       * Output Cost
+       * @default 0
+       */
+      output_cost: number;
+      /**
+       * Reasoning Cost
+       * @default 0
+       */
+      reasoning_cost: number;
+      /**
+       * Reasoning Percent
+       * @default 0
+       */
+      reasoning_percent: number;
+      /**
+       * Total Cost
+       * @default 0
+       */
+      total_cost: number;
     };
-    responses: never;
-    parameters: never;
-    requestBodies: never;
-    headers: never;
-    pathItems: never;
+    /** FileInfo */
+    FileInfo: {
+      /** File Name */
+      file_name: string;
+      /** Request Name */
+      request_name: string;
+      /** Created At */
+      created_at: string;
+    };
+    /** FolderInfo */
+    FolderInfo: {
+      /** Folder Name */
+      folder_name: string;
+      /** Files Count */
+      files_count: number;
+      /** Total Size Kb */
+      total_size_kb: number;
+    };
+    /** HTTPValidationError */
+    HTTPValidationError: {
+      /** Detail */
+      detail?: components["schemas"]["ValidationError"][];
+    };
+    /** LLMResponse */
+    LLMResponse: {
+      /**
+       * Model
+       * @default
+       */
+      model: string;
+      /**
+       * Temperature
+       * @default 0
+       */
+      temperature: number;
+      /**
+       * Service Tier
+       * @default
+       */
+      service_tier: string;
+      /**
+       * Input Tokens
+       * @default 0
+       */
+      input_tokens: number;
+      /**
+       * Output Tokens
+       * @default 0
+       */
+      output_tokens: number;
+      /**
+       * Reasoning Tokens
+       * @default 0
+       */
+      reasoning_tokens: number;
+    };
+    /** MultiRequestInformation */
+    MultiRequestInformation: {
+      /**
+       * File List
+       * @default []
+       */
+      file_list: string[];
+      /**
+       * Files Count
+       * @default 0
+       */
+      files_count: number;
+      /**
+       * Invalid Files Count
+       * @default 0
+       */
+      invalid_files_count: number;
+      /**
+       * Models
+       * @default []
+       */
+      models: string[];
+      /**
+       * Input Tokens
+       * @default 5
+       */
+      input_tokens: number;
+      /**
+       * Output Tokens
+       * @default 0
+       */
+      output_tokens: number;
+      /**
+       * Input Cost
+       * @default 0
+       */
+      input_cost: number;
+      /**
+       * Output Cost
+       * @default 0
+       */
+      output_cost: number;
+      /**
+       * Total Cost
+       * @default 0
+       */
+      total_cost: number;
+    };
+    /** RHFolderContentResponse */
+    RHFolderContentResponse: {
+      /** Files Infos */
+      files_infos: components["schemas"]["FileInfo"][];
+      folder_info: components["schemas"]["MultiRequestInformation"];
+    };
+    /** RHFolderListResponse */
+    RHFolderListResponse: {
+      /** Folders */
+      folders: components["schemas"]["FolderInfo"][];
+    };
+    /** RequestInformations */
+    RequestInformations: {
+      /**
+       * Is Valid
+       * @default true
+       */
+      is_valid: boolean;
+      /**
+       * Validity Error
+       * @default
+       */
+      validity_error: string;
+      /**
+       * Model
+       * @default
+       */
+      model: string;
+      /**
+       * Prompt
+       * @default
+       */
+      prompt: string;
+      /**
+       * Response Content
+       * @default
+       */
+      response_content: string;
+      llm_response: components["schemas"]["LLMResponse"];
+      cost_info: components["schemas"]["CostInformations"];
+    };
+    /** ValidationError */
+    ValidationError: {
+      /** Location */
+      loc: (string | number)[];
+      /** Message */
+      msg: string;
+      /** Error Type */
+      type: string;
+    };
+  };
+  responses: never;
+  parameters: never;
+  requestBodies: never;
+  headers: never;
+  pathItems: never;
 }
 export type $defs = Record<string, never>;
 export interface operations {
-    health_check_health_get: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": unknown;
-                };
-            };
-        };
+  health_check_health_get: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    get_request_history_folder_list_route_get_request_history_folder_list_get: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+    requestBody?: never;
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown;
         };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["RHFolderListResponse"];
-                };
-            };
+        content: {
+          "application/json": unknown;
         };
+      };
     };
-    get_request_history_folder_content_route_get_request_history_folder_content_get: {
-        parameters: {
-            query: {
-                folder_name: string;
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["RHFolderContentResponse"];
-                };
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
-        };
+  };
+  get_request_history_folder_list_route_get_request_history_folder_list_get: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    get_request_information_route_get_request_information_get: {
-        parameters: {
-            query: {
-                folder_name: string;
-                file_name: string;
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
+    requestBody?: never;
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown;
         };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["RequestInformations"];
-                };
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
+        content: {
+          "application/json": components["schemas"]["RHFolderListResponse"];
         };
+      };
     };
+  };
+  get_request_history_folder_content_route_get_request_history_folder_content_get: {
+    parameters: {
+      query: {
+        folder_name: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["RHFolderContentResponse"];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"];
+        };
+      };
+    };
+  };
+  get_request_information_route_get_request_information_get: {
+    parameters: {
+      query: {
+        folder_name: string;
+        file_name: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["RequestInformations"];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"];
+        };
+      };
+    };
+  };
 }

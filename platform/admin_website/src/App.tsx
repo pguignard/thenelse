@@ -1,20 +1,42 @@
-import { useState } from 'react';
-import RequestReports from './components/RequestReports';
-import MultiRequest from './components/MultiRequest';
-import './App.css';
+import { useState } from "react";
+import RequestReports from "./components/RequestReports";
+import MultiRequest from "./components/MultiRequest";
+import "./App.css";
 
 function App() {
-  const [activePage, setActivePage] = useState<'request_reports' | 'multi_request'>('request_reports');
+  enum Page {
+    RequestReports = "request_reports",
+    MultiRequest = "multi_request",
+  }
+  const [activePage, setActivePage] = useState<Page>(Page.RequestReports);
 
   return (
     <div className="app">
       <h1>⚙️ Admin website</h1>
       <header>
-        <button className={`button header-button${activePage === 'request_reports' ? ' selected' : ''}`} onClick={() => setActivePage('request_reports')}>📊 Request reports</button>
-        <button className={`button header-button${activePage === 'multi_request' ? ' selected' : ''}`} onClick={() => setActivePage('multi_request')}>🚀 Multi Request</button>
+        <button
+          className={`button header-button${
+            activePage === Page.RequestReports ? " selected" : ""
+          }`}
+          onClick={() => setActivePage(Page.RequestReports)}
+        >
+          📊 Request reports
+        </button>
+        <button
+          className={`button header-button${
+            activePage === Page.MultiRequest ? " selected" : ""
+          }`}
+          onClick={() => setActivePage(Page.MultiRequest)}
+        >
+          📊 Multi Request
+        </button>
       </header>
       <main>
-        {activePage === 'request_reports' ? <RequestReports /> : <MultiRequest />}
+        {activePage === Page.RequestReports ? (
+          <RequestReports />
+        ) : (
+          <MultiRequest />
+        )}
       </main>
     </div>
   );
