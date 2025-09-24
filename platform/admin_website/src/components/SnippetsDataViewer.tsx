@@ -143,7 +143,9 @@ export function SnippetsDataViewer({
                   <strong>Choices:</strong>
                   <ul>
                     {item.choices.map((choice, cIndex) => (
-                      <li key={cIndex}>{choice}</li>
+                      <pre className="snippet-pre" key={cIndex}>
+                        {choice}
+                      </pre>
                     ))}
                   </ul>
                 </div>

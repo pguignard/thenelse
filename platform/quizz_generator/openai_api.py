@@ -4,17 +4,16 @@ from typing import Any, Dict
 from pydantic import BaseModel
 from openai import OpenAI
 
-from quizz_generator.models import SnippetBatch
+
+# Modèle de paramètres de requête pour l'API OpenAI
+class RequestParams(BaseModel):
+    model: str  # ex: "gpt-4o-mini"
+    prompt: str  # prompt text
+    service_tier: str  # "default" | "flex"
+    response_model: type[BaseModel]
+
 
 # Client configuration (get api key from .env local file in the same folder)
-
-
-class RequestParams(BaseModel):
-    model: str
-    prompt: str
-    service_tier: str = "flex"
-
-
 with open(".env") as f:
     for line in f:
         if line.startswith("api_key="):
@@ -54,14 +53,14 @@ def to_openai_schema(model: type[BaseModel]) -> Dict[str, Any]:
     return _patch(schema)
 
 
-def get_response_from_llm_client(params: RequestParams) -> dict:
+def get_response_from_llm_client(request_params: RequestParams) -> dict:
     """Envoie une requête au client LLM et retourne la réponse en dict"""
-    schema = to_openai_schema(SnippetBatch)
+    schema = to_openai_schema(request_params.response_model)
 
     response = client.responses.create(
-        model=params.model,
-        input=params.prompt,
-        service_tier=params.service_tier,
+        model=request_params.model,
+        input=request_params.prompt,
+        service_tier=request_params.service_tier,
         # reasoning={
         #     "effort": "minimal",
         # },

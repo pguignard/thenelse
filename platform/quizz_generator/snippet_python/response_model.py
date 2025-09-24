@@ -1,5 +1,9 @@
 from pydantic import BaseModel
 
+"""
+Modèles Pydantic pour les snippets de code et les batches de snippets.
+Ce modèle est envoyé à l'API OpenAI pour création de la réponse."""
+
 
 class SnippetModel(BaseModel):
     language: str

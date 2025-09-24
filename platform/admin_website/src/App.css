@@ -55,7 +55,6 @@ header {
   border-radius: 6px;
   background-color: white;
   cursor: pointer;
-  margin-bottom: 1rem;
 }
 
 /* === Left Panel, filelist ==================================== */
@@ -76,11 +75,20 @@ header {
 .filelist-request-name {
   flex-grow: 1;
   font-weight: bold;
+  white-space: nowrap;
 }
-
 .filelist-date {
+  max-width: 100%;
+  text-align: right;
   font-size: 0.9em;
   color: #888;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.refresh-button {
+  width: 10%;
+  font-size: 1.3rem;
 }
 
 /* === Right Panel, details ==================================== */

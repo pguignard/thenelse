@@ -5,7 +5,7 @@ import {
 } from "../api/hooks";
 import { FolderInfo } from "../api/requests";
 
-const DEFAULT_FOLDER = "test";
+const DEFAULT_FOLDER = "old";
 
 function MultiRequest() {
   const [selectedFolder, setSelectedFolder] = useState<string>(DEFAULT_FOLDER);
@@ -59,7 +59,7 @@ function MultiRequest() {
               }}
             >
               {folderContentData.folder_info.files_count} fichiers &nbsp;-&nbsp;
-              {folderContentData.folder_info.total_cost.toFixed(4)} $
+              {folderContentData.folder_info.total_cost.toFixed(4)} cents
             </div>
             <div style={{ marginBottom: "1rem" }}>
               <strong>Fichiers invalides :</strong>{" "}
@@ -77,10 +77,10 @@ function MultiRequest() {
             </div>
             <div style={{ marginBottom: "1rem" }}>
               <strong>Input cost :</strong>{" "}
-              {folderContentData.folder_info.input_cost.toFixed(5)} $
+              {folderContentData.folder_info.input_cost.toFixed(5)} cents
               &nbsp;|&nbsp;
               <strong>Output cost :</strong>{" "}
-              {folderContentData.folder_info.output_cost.toFixed(5)} $
+              {folderContentData.folder_info.output_cost.toFixed(5)} cents
             </div>
           </div>
         )}

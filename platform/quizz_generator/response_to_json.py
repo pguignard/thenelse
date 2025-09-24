@@ -1,8 +1,7 @@
-from pydantic import BaseModel, ValidationError
 import json
 from pathlib import Path
 
-from quizz_generator.models import SnippetModel
+from quizz_generator.snippet_python.models import SnippetModel
 
 
 def save_snippet_batch_to_ndjson(snippet_batch_json: str, path: Path) -> int:

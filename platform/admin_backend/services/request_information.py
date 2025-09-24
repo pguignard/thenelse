@@ -46,7 +46,7 @@ class RequestInformations(BaseModel):
 
 
 def get_request_informations(folder_name: str, file_name: str) -> RequestInformations:
-    """Récupère les informations d'une requête spécifique à partir de son nom de fichier."""
+    """Récupère les informations d'une requête spécifique à partir de son nom de fichier et de son dossier."""
     try:
         file_content = get_file_content_as_dict(folder_name, file_name)
         return compute_request_informations(file_content)
@@ -131,6 +131,7 @@ def calculate_cost(llm_response: LLMResponse, model: str) -> CostInformations:
     pricing = {
         "gpt-5-nano": {"input": 0.05, "output": 0.40},
         "gpt-5-mini": {"input": 0.25, "output": 2.00},
+        "gpt-4.1": {"input": 2.00, "output": 8.00},
         "gpt-4.1-nano": {"input": 0.10, "output": 0.40},
         "gpt-4.1-mini": {"input": 0.40, "output": 1.60},
         "gpt-4o-mini": {"input": 0.15, "output": 0.60},
