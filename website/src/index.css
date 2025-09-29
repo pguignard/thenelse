@@ -5,7 +5,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  background-color: var(--color-root-bg);
+  background-color: var(--root-bg);
 }
 
 body {
@@ -13,30 +13,40 @@ body {
   min-height: 100vh;
 }
 
-
 :root {
-  --color-root-bg: #ffffff;
+  /* Colors definitions */
+  --white: #ffffff;
+  --black: #000000;
+  --dark-grey: #888888;
+  --medium-grey: #d0d0d0;
+  --light-grey: #f0f0f0;
+  --xlight-grey: #fcfcfc;
+
+  --theme-dark: #0c50d2;
+  --theme: #44b7ef;
+  --theme-light: #e1f3ff;
+  --theme-xlight: #f7fbff;
 
   /* Logo */
-  --color-then: #0c50d2;
-  --color-else: #44b7ef;
+  --then: var(--theme-dark);
+  --else: var(--theme);
+
+  /* Common button */
+  --button-border: var(--medium-grey);
+  --button-border-hover: var(--dark-grey);
+  --button-border-selected: var(--dark-grey);
+
+  --button-bg: var(--xlight-grey);
+  --button-bg-hover: var(--theme-xlight);
+  --button-bg-selected: var(--theme-light);
 
   /* Border : code snippet */
-  --color-border: #d0d0d0;
-
-  /* Buttons */
-  --color-answer-button-bg: #f5f5f5;
-  --color-answer-button-bg-hover: #ffffff;
-  --color-answer-button-border-hover: #b0b0b0;
-
-  --color-new-question-button: #84cdf1;
-  --color-new-question-button-hover: #d8f2ff;
-  --color-new-question-button-border-hover: #2fa3e0;
+  --border: var(--medium-grey);
 
   /* Markdown inline code */
-  --color-bg-md-inline-code: #fdf6e3;
-  --color-text-md-inline-code: #9f8228;
+  --bg-md-inline-code: #fdf6e3;
+  --text-md-inline-code: #9f8228;
 
-  --color-result-correct: #469f67;
-  --color-result-incorrect: #b76161;
+  --result-correct: #469f67;
+  --result-incorrect: #b76161;
 }

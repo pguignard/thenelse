@@ -10,9 +10,7 @@ show_help() {
     echo "  -w, --website    Lance le frontend React (Vite dev server)"
     echo "  -h, --help       Affiche cette aide"
     echo ""
-    echo "Exemples:"
-    echo "  $0 -b            Lance uniquement le backend"
-    echo "  $0 -w            Lance uniquement le website"
+    echo "Sans option, lance les deux en parallèle avec préfixes pour le logging."
 }
 
 # Fonction pour lancer le backend
@@ -30,14 +28,6 @@ run_website() {
     npm run dev
 }
 
-# Vérification des arguments
-if [ $# -eq 0 ]; then
-    echo "❌ Erreur: Aucune option spécifiée"
-    echo ""
-    show_help
-    exit 1
-fi
-
 # Traitement des options
 case "$1" in
     -b|--backend)
@@ -49,6 +39,13 @@ case "$1" in
     -h|--help)
         show_help
         exit 0
+        ;;
+    "")
+        # Aucune option : lancer les deux en parallèle avec préfixes
+        # pour le logging
+        run_backend  2>&1 | sed 's/^/[FASTAPI] /' &
+        run_website  2>&1 | sed 's/^/[REACT] /' &
+        wait
         ;;
     *)
         echo "❌ Erreur: Option inconnue '$1'"

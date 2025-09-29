@@ -8,62 +8,87 @@
 /* === TITRE ==================================== */
 h1 {
   font-size: 3.2em;
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   font-weight: bold;
 }
 
 .then {
-  color: var(--color-then);
+  color: var(--then);
 }
 
 .else {
-  color: var(--color-else);
+  color: var(--else);
 }
 
-/* === SNIPPET ==================================== */
-.code-snippet {
-  margin: 2rem auto;
-}
-
-.code-content pre {
-  margin: 0;
-  font-family: 'Lucida Console', 'Monaco', 'Menlo', monospace;
-  font-size: 1rem;
-  background: none;
-  text-align: left;
-  padding: 2rem 1rem;
-  border: 1px solid var(--color-border);
-}
-
-
-/* === BOUTONS ==================================== */
-.answer-button,
-.new-question-button {
-  border: 0px;
-  display: block;
-  width: 100%;
+/* === COMMON BUTTONS ==================================== */
+.button {
+  border: 0.05rem solid var(--button-border);
+  background: var(--button-bg);
   margin: 1rem auto;
   padding: 0.6rem 1rem;
   font-size: 1rem;
   cursor: pointer;
   letter-spacing: 1px;
   border-radius: 6px;
-  border: 2px solid transparent;
 }
+
+.button:hover {
+  border-color: var(--button-border-hover);
+  background: var(--button-bg-hover);
+}
+
+.button.selected {
+  transition: ease-in 0.1s;
+  border-color: var(--button-border-selected);
+  background: var(--button-bg-selected);
+}
+
+/* === SELECTORS ==================================== */
+.selector-row {
+  display: flex;
+  gap: 1rem; /* espace entre les boutons */
+  justify-content: center;
+  margin: 2rem 0;
+}
+
+/* Les boutons de sélection restent sur une ligne */
+.selector-button {
+  width: auto; /* pour éviter le 100% hérité de .button */
+  margin: 0; /* retire le margin vertical hérité de .button */
+}
+
+/* === SNIPPET ==================================== */
+
+.snippet-info {
+  text-align: left;
+  font-size: 1rem;
+  margin: 1rem auto 0.5rem auto;
+  color: var(--dark-grey);
+  font-family: Arial, sans-serif;
+}
+
+.code-snippet {
+  margin: 2rem auto;
+}
+
+.code-content pre {
+  margin: 0;
+  font-family: "Lucida Console", "Monaco", "Menlo", monospace;
+  font-size: 1rem;
+  background: none;
+  text-align: left;
+  padding: 2rem 1rem;
+  border: 1px solid var(--border);
+}
+
+/* === ANSWER BUTTONS ==================================== */
 
 .answer-button {
-  background: var(--color-answer-button-bg);
+  display: block;
+  width: 100%;
+  font-family: "Lucida Console", "Monaco", "Menlo", monospace;
 }
-
-.answer-button:hover {
-  border: 2px solid var(--color-answer-button-border-hover);
-  background: var(--color-answer-button-bg-hover);
-}
-
-.answer-button {
-  font-family: 'Lucida Console', 'Monaco', 'Menlo', monospace;
-}
-
 
 /* === CORRECTION / RÉSULTAT ==================================== */
 .result-section {
@@ -84,31 +109,20 @@ h1 {
 }
 
 .result-message.correct {
-  color: var(--color-result-correct);
+  color: var(--result-correct);
 }
 
 .result-message.incorrect {
-  color: var(--color-result-incorrect);
+  color: var(--result-incorrect);
 }
 
 .new-question-button {
-  margin-top: 2rem;
-  margin-bottom: 2rem;
-  font-family: Arial, sans-serif;
-  font-size: 1.3rem;
-  background: var(--color-new-question-button);
-  border: 2px solid transparent;
-}
-
-.new-question-button:hover {
-  background: var(--color-new-question-button-hover);
-  border: 2px solid var(--color-new-question-button-border-hover);
+  width: 100%;
 }
 
 .correct-answer {
-  color: var(--color-result-correct);
+  color: var(--result-correct);
 }
-
 
 .explanation {
   font-size: 1.1rem;
@@ -123,9 +137,9 @@ h1 {
 
 .explanation code {
   font-size: 1rem;
-  background: var(--color-bg-md-inline-code);
-  color: var(--color-text-md-inline-code);
-  font-family: 'Fira Mono', 'Consolas', monospace;
+  background: var(--bg-md-inline-code);
+  color: var(--text-md-inline-code);
+  font-family: "Fira Mono", "Consolas", monospace;
   padding: 2px 6px;
   border-radius: 4px;
 }
