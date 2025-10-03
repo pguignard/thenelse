@@ -1,7 +1,7 @@
 import json
 from pathlib import Path
 
-from quizz_generator.snippet_python.models import SnippetModel
+from llm_requests.snippets.models import SnippetModel
 
 
 def save_snippet_batch_to_ndjson(snippet_batch_json: str, path: Path) -> int:

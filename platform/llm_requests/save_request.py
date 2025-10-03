@@ -1,9 +1,18 @@
-import json
 import datetime
 from pathlib import Path
+from pydantic import BaseModel
 
-from quizz_generator.openai_api import get_response_from_llm_client, RequestParams
-
+from llm_requests.openai_api import RequestParams
+from llm_requests.request_information import (
+    get_response_content,
+    get_response_info,
+    get_cost_info,
+)
+from llm_requests.models import (
+    RequestInfo,
+    ResponseInfo,
+    CostInfo,
+)
 
 """
 Lance des requêtes vers le LLM et sauvegarde les réponses dans des fichiers JSON.
@@ -20,33 +29,36 @@ REQUESTS_ROOT_DIR = "request_history"
 
 
 def save_request(
-    output_dir: str,
+    folder_name: str,
     request_name: str,
-    request_params: RequestParams,
+    prompt: str,
     response: dict,
 ) -> str:
     """Génère des requêtes vers le LLM et sauvegarde les réponses dans des fichiers JSON."""
 
-    # Envoi de la requête à l'API LLM
-    response = get_response_from_llm_client(request_params)
+    timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+    response_content = get_response_content(response)
+    response_info: ResponseInfo = get_response_info(response)
+    cost_info: CostInfo = get_cost_info(response_info)
 
-    # Stockage dans l'historique des requêtes
-    request_report = {
-        "model": request_params.model,
-        "prompt": request_params.prompt,
-        "response": response,
-    }
+    request_info = RequestInfo(
+        request_name=request_name,
+        timestamp=timestamp,
+        prompt=prompt,
+        response_content=response_content,
+        response_info=response_info,
+        cost_info=cost_info,
+    )
 
     # Créer filename avec prompt_type et timestamp
-    timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
-    output_dir = Path(REQUESTS_ROOT_DIR) / output_dir
+    output_dir = Path(REQUESTS_ROOT_DIR) / folder_name
     output_dir.mkdir(parents=True, exist_ok=True)
     # "gpt-4o-mini" -> "4o-mini"
-    model_short = request_params.model[4:]
+    model_short = response_info.model[4:]
 
     file_path = output_dir / f"{timestamp}_{request_name}({model_short}).json"
     # Sauvegarder les données dans un fichier JSON
     with open(file_path, "w", encoding="utf-8") as f:
-        json.dump(request_report, f, indent=2, ensure_ascii=False)
+        f.write(request_info.model_dump_json(indent=2))
 
     return str(file_path)

@@ -6,8 +6,7 @@ import pathlib
 
 
 from admin_backend.services.request_information import (
-    get_request_informations,
-    RequestInformations,
+    get_request_infos,
 )
 
 """
@@ -53,7 +52,7 @@ def main(
 
     with output_path.open("w", encoding="utf-8") as output_file:
         for file_name in file_list:
-            request_info = get_request_informations(folder_name, file_name)
+            request_info = get_request_infos(folder_name, file_name)
             content = request_info.response_content
             # convert content string to dict
             content_dict = json.loads(content)

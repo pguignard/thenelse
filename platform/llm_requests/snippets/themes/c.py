@@ -1,0 +1,40 @@
+from ..models import Levels
+
+themes = {
+    Levels.BEGINNER: [
+        "Variables et types primitifs : savoir déclarer et utiliser des entiers, flottants, caractères et booléens, et afficher leur contenu avec printf.",
+        "Opérateurs arithmétiques et logiques : comprendre les opérations de base (+, -, *, /, %, &&, ||, !).",
+        "Structures de contrôle : utiliser if, else et switch pour exécuter du code conditionnel.",
+        "Boucles : répéter des instructions avec for, while et do-while.",
+        "Chaînes de caractères : manipuler des chaînes avec des tableaux de char et utiliser des fonctions simples comme strlen et strcpy.",
+        "Tableaux : créer, parcourir et modifier des tableaux statiques unidimensionnels.",
+        "Portée des variables : comprendre la différence entre variables locales, globales et statiques.",
+        "Fonctions simples : déclarer, définir et appeler des fonctions avec paramètres et valeur de retour.",
+        "Opérateurs de comparaison : utiliser ==, !=, <, >, <=, >= pour tester des conditions.",
+        "Instructions de sortie : afficher du texte et des résultats avec printf.",
+    ],
+    Levels.INTERMEDIATE: [
+        "Structures : regrouper plusieurs variables de types différents dans une même entité et accéder à leurs champs.",
+        "Tableaux multidimensionnels : créer et manipuler des tableaux à deux dimensions pour représenter des matrices.",
+        "Fonctions avec pointeurs : passer des pointeurs en paramètres pour modifier des valeurs ou travailler sur des tableaux.",
+        "Gestion dynamique de la mémoire : utiliser malloc, calloc, realloc et free pour créer et libérer des zones mémoire.",
+        "Chaînes et pointeurs : comprendre la relation entre pointeurs et tableaux de caractères, manipuler des chaînes avec des pointeurs.",
+        "Enumérations : définir et utiliser des ensembles de constantes nommées.",
+        "Structures imbriquées : définir et manipuler des structures contenant d’autres structures.",
+        "Introduction au typage statique : utiliser typedef pour définir des alias de types et améliorer la lisibilité du code.",
+        "Fonctions récursives : écrire et exécuter des fonctions qui s’appellent elles-mêmes.",
+        "Opérateurs bit à bit : utiliser &, |, ^, ~, << et >> pour manipuler directement les bits.",
+    ],
+    Levels.EXPERT: [
+        "Pointeurs de pointeurs : manipuler des références multiples et comprendre l’arithmétique de pointeurs avancée.",
+        "Listes chaînées : implémenter des structures de données dynamiques avec des nœuds reliés par des pointeurs.",
+        "Fonctions pointeurs : déclarer des pointeurs vers des fonctions et les utiliser pour écrire du code générique.",
+        "Gestion avancée de la mémoire : éviter les fuites, travailler avec des zones mémoire complexes et simuler des tableaux dynamiques.",
+        "Macros et préprocesseur : utiliser #define, #ifdef, #ifndef et les macros paramétrées pour générer du code conditionnel.",
+        "Union : définir des variables capables de stocker différents types au même emplacement mémoire.",
+        "Typage et généricité : utiliser void* et des macros pour simuler des fonctions génériques.",
+        "Fichiers en C : ouvrir, lire, écrire et fermer des fichiers avec fopen, fread, fwrite et fclose.",
+        "Concurrence de bas niveau : introduction aux threads (pthread) et synchronisation simple.",
+        "Techniques avancées de structuration : implémenter des patterns comme la table de fonctions ou le polymorphisme via pointeurs de fonction.",
+    ],
+}

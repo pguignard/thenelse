@@ -3,11 +3,11 @@
 from datetime import datetime
 import typer
 
-from quizz_generator.save_request import save_request
-from quizz_generator.openai_api import get_response_from_llm_client, RequestParams
+from llm_requests.save_request import save_request
+from llm_requests.openai_api import get_response_from_llm_client, RequestParams
 
-from quizz_generator.snippet_python import for_snippet_multi_request
-from quizz_generator.snippet_python.level_themes import Level
+from llm_requests.snippets import for_snippet_multi_request
+from llm_requests.snippets.models import Level
 
 app = typer.Typer()
 

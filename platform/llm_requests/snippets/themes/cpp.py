@@ -1,0 +1,40 @@
+from ..models import Levels
+
+themes = {
+    Levels.BEGINNER: [
+        "Variables et types primitifs : déclarer et utiliser des entiers, flottants, booléens et caractères, puis afficher leur contenu avec cout.",
+        "Opérateurs arithmétiques et logiques : effectuer des calculs simples et tester des conditions avec &&, || et !.",
+        "Structures de contrôle : écrire des instructions conditionnelles avec if, else et switch.",
+        "Boucles : répéter des instructions avec for, while et do-while.",
+        "Chaînes de caractères : manipuler std::string, concaténer et obtenir la taille d’une chaîne.",
+        "Tableaux : créer, parcourir et modifier des tableaux statiques unidimensionnels.",
+        "Portée des variables : comprendre la différence entre variables locales, globales et statiques.",
+        "Fonctions simples : écrire et appeler des fonctions avec paramètres et valeur de retour.",
+        "Vecteurs : utiliser std::vector pour stocker et manipuler des listes dynamiques de valeurs.",
+        "Opérateurs de comparaison : utiliser ==, !=, <, >, <=, >= pour tester des conditions.",
+    ],
+    Levels.INTERMEDIATE: [
+        "Structures : définir et utiliser des structures regroupant plusieurs champs.",
+        "Classes et objets : créer une classe simple avec attributs et méthodes publiques.",
+        "Encapsulation : utiliser private et public pour protéger les données et contrôler l’accès.",
+        "Constructeurs et destructeurs : initialiser et libérer correctement les objets.",
+        "Surcharge de fonctions : définir plusieurs fonctions portant le même nom avec des paramètres différents.",
+        "Références et pointeurs : comprendre la différence et les utiliser comme paramètres de fonctions.",
+        "Opérateurs bit à bit : appliquer &, |, ^, ~, << et >> pour manipuler directement les bits.",
+        "Vecteurs et itérateurs : parcourir un std::vector avec des itérateurs pour manipuler ses éléments.",
+        "Fonctions récursives : écrire des fonctions qui s’appellent elles-mêmes pour résoudre un problème.",
+        "Introduction au typage statique : utiliser auto et des fonctions templates simples pour écrire du code générique.",
+    ],
+    Levels.EXPERT: [
+        "Héritage simple : créer une classe dérivée qui hérite d’une classe de base et redéfinit certaines méthodes.",
+        "Polymorphisme : utiliser des pointeurs ou références de base pour manipuler des objets dérivés avec virtual.",
+        "Surcharge d’opérateurs : définir des opérateurs personnalisés comme + ou << pour une classe.",
+        "Templates de fonctions et de classes : écrire du code générique avec des paramètres de type.",
+        "STL avancée : manipuler des conteneurs comme std::map, std::set et utiliser leurs itérateurs.",
+        "Lambda et fonctions anonymes : définir et utiliser des lambdas pour des traitements concis.",
+        "Gestion de la mémoire : utiliser new, delete, et comprendre RAII avec std::unique_ptr et std::shared_ptr.",
+        "Exceptions : lancer et capturer des exceptions avec try, throw et catch.",
+        "Programmation asynchrone : utiliser std::thread et std::async pour exécuter des tâches en parallèle.",
+        "Patrons de conception : implémenter des patterns comme Singleton ou Observer avec les outils du langage.",
+    ],
+}

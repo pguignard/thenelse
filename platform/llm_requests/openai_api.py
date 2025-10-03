@@ -1,5 +1,6 @@
 import os
 from typing import Any, Dict
+from pathlib import Path
 
 from pydantic import BaseModel
 from openai import OpenAI
@@ -14,11 +15,20 @@ class RequestParams(BaseModel):
 
 
 # Client configuration (get api key from .env local file in the same folder)
-with open(".env") as f:
+# .env file is in the parent folder of this file
+parent_folder = Path(__file__).parent.parent
+env_path = parent_folder / ".env"
+# Raise error if .env file does not exist
+if not env_path.exists():
+    raise FileNotFoundError(f".env file not found in {parent_folder}")
+
+with open(env_path) as f:
     for line in f:
         if line.startswith("api_key="):
             api_key = line.strip().split("=")[1]
             break
+    else:
+        raise ValueError("api_key not found in .env file")
 
 os.environ["OPENAI_API_KEY"] = api_key
 client = OpenAI()

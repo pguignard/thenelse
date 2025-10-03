@@ -1,0 +1,40 @@
+from ..models import Levels
+
+themes = {
+    Levels.BEGINNER: [
+        "Variables et types primitifs : déclarer et utiliser des entiers, flottants, booléens et caractères, puis afficher leur contenu avec System.out.println.",
+        "Opérateurs arithmétiques et logiques : effectuer des calculs simples et tester des conditions avec &&, || et !.",
+        "Structures de contrôle : écrire des instructions conditionnelles avec if, else et switch.",
+        "Boucles : répéter des instructions avec for, while et do-while.",
+        "Chaînes de caractères : manipuler des String avec concaténation, méthodes comme length(), substring() et equals().",
+        "Tableaux : créer, parcourir et modifier des tableaux unidimensionnels.",
+        "Portée des variables : comprendre la différence entre variables locales, attributs de classe et variables statiques.",
+        "Méthodes simples : définir et appeler des méthodes avec paramètres et valeur de retour.",
+        "Opérateurs de comparaison : utiliser ==, !=, <, >, <=, >= pour tester des conditions.",
+        "Casting et conversion : convertir explicitement entre types primitifs et utiliser l’autoboxing.",
+    ],
+    Levels.INTERMEDIATE: [
+        "Classes et objets : créer une classe avec attributs et méthodes, puis instancier des objets.",
+        "Encapsulation : utiliser private et public, et accéder aux données via getters et setters.",
+        "Constructeurs : initialiser des objets avec différents constructeurs et surcharge de constructeurs.",
+        "Surcharge de méthodes : définir plusieurs méthodes avec le même nom mais des signatures différentes.",
+        "Tableaux multidimensionnels : déclarer et manipuler des tableaux à deux dimensions.",
+        "Collections de base : utiliser ArrayList et manipuler ses éléments.",
+        "Boucles avancées : utiliser for-each pour parcourir des collections.",
+        "Méthodes récursives : écrire des méthodes qui s’appellent elles-mêmes pour résoudre un problème.",
+        "Introduction au typage générique : utiliser des classes génériques simples comme ArrayList<T>.",
+        "Énumérations : définir et utiliser un type enum avec des valeurs constantes.",
+    ],
+    Levels.EXPERT: [
+        "Héritage simple : créer une classe dérivée qui hérite d’une classe de base et redéfinit certaines méthodes.",
+        "Polymorphisme : utiliser des références de type parent pour manipuler des objets enfants et redéfinir des méthodes avec override.",
+        "Classes abstraites et interfaces : définir des contrats et implémenter plusieurs comportements.",
+        "Surcharge d’opérateurs inexistante en Java : comprendre pourquoi elle n’existe pas et utiliser des méthodes à la place.",
+        "Génériques avancés : écrire des classes et méthodes génériques avec des bornes (extends, super).",
+        "Collections avancées : manipuler HashMap, HashSet et comprendre les clés et valeurs.",
+        "Expressions lambda : définir des fonctions anonymes et les utiliser avec les interfaces fonctionnelles.",
+        "Streams : traiter des collections avec map, filter et reduce.",
+        "Programmation asynchrone : utiliser les threads avec Runnable et Thread, puis les executors.",
+        "Patrons de conception : implémenter des patterns comme Singleton, Factory et Observer avec les mécanismes du langage.",
+    ],
+}

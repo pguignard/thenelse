@@ -1,0 +1,40 @@
+from ..models import Levels
+
+themes = {
+    Levels.BEGINNER: [
+        "Variables et types primitifs : déclarer et utiliser des entiers, flottants, booléens et chaînes, puis afficher leur contenu avec Console.WriteLine.",
+        "Opérateurs arithmétiques et logiques : effectuer des calculs simples et tester des conditions avec &&, || et !.",
+        "Structures de contrôle : écrire des instructions conditionnelles avec if, else et switch.",
+        "Boucles : répéter des instructions avec for, while et foreach.",
+        "Chaînes de caractères : manipuler des string avec concaténation, interpolation et méthodes comme Length ou Substring.",
+        "Tableaux : créer, parcourir et modifier des tableaux unidimensionnels.",
+        "Listes génériques : utiliser List<T> pour stocker et manipuler des collections dynamiques.",
+        "Portée des variables : comprendre la différence entre variables locales, globales et statiques.",
+        "Fonctions simples : définir et appeler des méthodes avec paramètres et valeur de retour.",
+        "Opérateurs de comparaison : utiliser ==, !=, <, >, <=, >= pour tester des conditions.",
+    ],
+    Levels.INTERMEDIATE: [
+        "Structures : définir et utiliser des struct pour regrouper plusieurs champs.",
+        "Classes et objets : créer une classe avec attributs, propriétés et méthodes publiques.",
+        "Encapsulation : protéger les données avec private et contrôler l’accès via get/set.",
+        "Constructeurs et destructeurs : initialiser et nettoyer correctement des objets.",
+        "Surcharge de méthodes : définir plusieurs méthodes portant le même nom avec des paramètres différents.",
+        "Références et valeurs : comprendre la différence entre types valeur et types référence.",
+        "Collections génériques : manipuler Dictionary<TKey, TValue> et HashSet<T>.",
+        "Fonctions récursives : écrire des méthodes qui s’appellent elles-mêmes pour résoudre un problème.",
+        "Introduction au typage statique : utiliser var, dynamic et des méthodes génériques simples.",
+        "Événements et délégués : introduire les délégués comme pointeurs de fonction typés et les utiliser pour des callbacks simples.",
+    ],
+    Levels.EXPERT: [
+        "Héritage simple et interfaces : dériver des classes et implémenter plusieurs interfaces.",
+        "Polymorphisme : utiliser virtual, override et abstract pour personnaliser le comportement des classes.",
+        "Propriétés avancées : utiliser des propriétés auto-implémentées et calculées pour gérer l’état d’un objet.",
+        "Surcharge d’opérateurs : redéfinir des opérateurs comme + ou == dans une classe personnalisée.",
+        "Génériques avancés : écrire des classes et méthodes génériques avec contraintes de type.",
+        "LINQ : interroger et transformer des collections avec les opérateurs de requête et les méthodes d’extension.",
+        "Expressions lambda : définir des fonctions anonymes pour des traitements concis.",
+        "Gestion de la mémoire : comprendre le garbage collector et utiliser IDisposable avec using.",
+        "Programmation asynchrone : utiliser async et await avec Task pour exécuter du code parallèle.",
+        "Patrons de conception : implémenter des patterns comme Singleton, Factory ou Observer avec les outils du langage.",
+    ],
+}
